@@ -1,5 +1,22 @@
 # DCWEBSTUDIO SEO Platform Changelog
 
+## 2026-09-25 — Isolated SEO access through the owner Codex bridge
+
+- Added an explicit SEO profile to the existing private owner-to-Codex Telegram
+  bridge with workspace `/opt/apps/dcwebstudio-seo`, the project-only bootstrap
+  route and its own persistent thread slot.
+- Preserved the former bridge thread as the independent `site` session; no SEO
+  thread exists until the owner explicitly selects and starts it.
+- Clarified that this development-session router is not the future D-018 SEO
+  runtime notifier/command adapter. The application adapter still requires
+  separate secrets, service, state, permissions and durable outbox behavior.
+- No SEO runtime code, database, container, provider request or WordPress
+  product behavior changed.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/project-routing-telegram-20260925-141532`
+
 ## 2026-09-25 — Project-scoped documentation routing
 
 - Removed shared-server and WordPress documentation from the normal mandatory

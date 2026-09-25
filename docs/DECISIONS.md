@@ -218,6 +218,10 @@ an expiring token, authorization and the ordinary budget/approval gates. It
 offers no arbitrary shell, SQL, secret access or publication command.
 
 Keep it inside the SEO project boundary as a small command from the same image.
-Do not reuse the existing WordPress Telegram bridge's secrets, Codex state,
-database, service or lifecycle. Cross-project bot routing, if ever desired,
-requires a separate explicit review.
+Do not reuse the owner-facing Telegram Codex bridge's secrets, Codex state,
+database, service or lifecycle.
+
+The separately reviewed `/opt/apps/codex-telegram` service may route the owner
+to isolated site and SEO development threads. That administrative convenience
+does not implement this decision's application notifier or command adapter and
+does not permit the SEO runtime to reuse its bot identity, state or privileges.

@@ -1,6 +1,6 @@
 # DCWEBSTUDIO SEO Platform Handoff
 
-Snapshot: 2026-09-25 13:41 Europe/Berlin
+Snapshot: 2026-09-25 14:25 Europe/Berlin
 
 ## Current state
 
@@ -55,8 +55,10 @@ diagnostic raw-payload maximum are confirmed. R0.1 is complete.
 The owner also requires structured logs, Telegram delivery of actionable final
 errors and a later Telegram command bridge. D-018 defines a durable PostgreSQL
 notification outbox and a thin project-owned Telegram adapter over the same
-CLI/API service layer. It must remain separate from the existing WordPress
-Telegram bridge and must not expose shell, SQL, secrets or publication.
+CLI/API service layer. The existing owner-to-Codex Telegram bridge can now open
+an isolated SEO development thread, but it is not that future runtime adapter.
+The application notifier/command adapter must retain separate secrets, service,
+state and permissions and must not expose shell, SQL, secrets or publication.
 
 ## Agreed direction
 

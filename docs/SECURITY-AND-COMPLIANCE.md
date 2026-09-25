@@ -87,8 +87,9 @@ claims and data exfiltration patterns.
   actionable failure, not every transient retry.
 - Record command actor, normalized command, plan/run IDs and outcome. Store the
   minimum Telegram message data needed for audit and retention.
-- Do not reuse the existing WordPress Telegram bridge's secrets, Codex state,
-  service or runtime lifecycle.
+- Do not reuse the owner-facing multi-project Telegram Codex bridge's secrets,
+  Codex state, service or runtime lifecycle. Its isolated SEO development
+  thread is not the application's notifier/command adapter.
 
 ## Retention baseline
 
