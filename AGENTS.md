@@ -4,15 +4,22 @@ These instructions apply to `/opt/apps/dcwebstudio-seo`.
 
 ## Mandatory read order
 
-1. `/opt/docs/README.md`
-2. `/opt/docs/HANDOFF.md`
-3. `/opt/docs/dcwebstudio-seo/README.md`
-4. `/opt/docs/dcwebstudio-seo/HANDOFF.md`
-5. the project documents routed by that README
+For a normal SEO-platform task, read only:
+
+1. `/opt/apps/dcwebstudio-seo/docs/README.md`
+2. `/opt/apps/dcwebstudio-seo/docs/HANDOFF.md`
+3. the task-specific documents routed by that README
 
 Read the WordPress project instructions only when a task explicitly changes
-the site plugin, site content or WordPress integration. Do not read or modify
-either Poehali project as part of SEO-platform work.
+the site plugin, site content or WordPress integration. For that boundary,
+start with `/opt/apps/dcwebstudio-seo/docs/WORDPRESS-INTEGRATION.md` and then
+read only the affected WordPress workflow documents.
+
+Read `/opt/docs/README.md` and `/opt/docs/HANDOFF.md` only when the request
+changes shared VPS infrastructure, networking, TLS, OpenLiteSpeed, systemd,
+host security or cross-project boundaries. Do not read or modify unrelated
+WordPress implementation docs or either Poehali project as part of normal
+SEO-platform work.
 
 ## Boundaries
 

@@ -1,5 +1,22 @@
 # DCWEBSTUDIO SEO Platform Changelog
 
+## 2026-09-25 — Project-scoped documentation routing
+
+- Removed shared-server and WordPress documentation from the normal mandatory
+  SEO-platform read path.
+- Converted the project README into a task router so a session loads only the
+  current handoff and documents relevant to its requested work.
+- Added `WORDPRESS-INTEGRATION.md` as the single explicit cross-project entry
+  point with ownership, persistence and publication boundaries.
+- Updated the WordPress instructions and site documentation router with the
+  reciprocal isolation rule.
+- No application code, container, database, provider request, WordPress
+  runtime, content or frontend behavior changed.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/project-routing-telegram-20260925-141532`
+
 ## 2026-09-25 — R0.2 repository and canonical documentation migration
 
 - Initialized the monorepo at `/opt/apps/dcwebstudio-seo` and connected the

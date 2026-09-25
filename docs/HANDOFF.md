@@ -10,6 +10,12 @@ the canonical documentation package. No application code, database, container,
 service, public route, runtime credentials, scheduled jobs or WordPress plugin
 exist yet.
 
+Project documentation is now strictly routed. Normal SEO sessions start with
+the repository `AGENTS.md`, this package's `README.md` and this handoff, then
+read only the task-specific route. They do not preload shared-server or
+WordPress implementation documentation. Explicit WordPress integration begins
+at `WORDPRESS-INTEGRATION.md`.
+
 The production site currently has WordPress-native titles, canonical links,
 virtual robots.txt and a working core sitemap. It does not have managed meta
 descriptions, Open Graph, project-owned JSON-LD or a stable SEO automation

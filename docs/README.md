@@ -9,27 +9,25 @@ Planning and source-control foundation only. Canonical documentation is tracked
 in the project repository, but there is no runtime, Compose stack, database,
 WordPress plugin, runtime credential set or scheduler.
 
-## Read order
+## Session start
 
-1. `HANDOFF.md` — current state and next action.
-2. `MVP-SCOPE.md` — active R0.1 language, geography, device and first-output
-   baseline.
-3. `ARCHITECTURE.md` — component boundaries and integration direction.
-4. `REUSE-AND-COST.md` — thin-core boundary, open-source intake, provider cost
-   policy and zero-paid-API MVP path.
-5. `DATA-MODEL.md` — durable entities, provenance and lifecycle states.
-6. `WORKFLOWS.md` — collection, clustering, briefing, drafting and publishing.
-7. `OPERATOR-INTERFACE.md` — natural-language/CLI entry at any workflow stage.
-8. `INFRASTRUCTURE.md` — proposed Compose topology and VPS capacity envelope.
-9. `SECURITY-AND-COMPLIANCE.md` — credentials, crawling, prompt injection and
-   publication controls.
-10. `PHASE-0-BASELINE.md` — owner decision packet, multilingual/Polylang
-   contract, persistence baseline and final repository layout.
-11. `DECISIONS.md` — accepted and proposed architectural decisions.
-12. `ROADMAP.md` — numbered execution steps, acceptance gates and current
-    active milestone.
-13. `OPEN-QUESTIONS.md` — choices that still require evidence or owner input.
-14. `CHANGELOG.md` — dated implementation history.
+Read `HANDOFF.md`, identify the active roadmap step and then open only the
+matching route below. Do not preload every architecture, infrastructure,
+WordPress or history document. Search `CHANGELOG.md` selectively when a dated
+implementation fact is required.
+
+| Task | Read after `HANDOFF.md` |
+|---|---|
+| Current execution step | `ROADMAP.md`, then only the documents named by that step |
+| MVP language, country, device or output scope | `MVP-SCOPE.md` |
+| Core boundaries or component design | `ARCHITECTURE.md`, relevant entries in `DECISIONS.md` |
+| Contracts, persistence or provenance | `DATA-MODEL.md`, `WORKFLOWS.md` |
+| CLI, Codex or Telegram operator behavior | `OPERATOR-INTERFACE.md`, relevant security sections |
+| Compose, resources or deployment | `INFRASTRUCTURE.md`, `SECURITY-AND-COMPLIANCE.md` |
+| Open-source reuse or provider cost | `REUSE-AND-COST.md`, `THIRD_PARTY.md` at repository root |
+| WordPress, Polylang or draft delivery boundary | `WORDPRESS-INTEGRATION.md`, then only the affected site workflow/contract |
+| Unresolved owner decision | `OPEN-QUESTIONS.md`, relevant decision record |
+| Historical evidence | targeted search in `CHANGELOG.md`; do not read it end to end |
 
 ## Project boundaries
 
@@ -39,6 +37,10 @@ WordPress plugin, runtime credential set or scheduler.
 - Production WordPress: `/var/www/dcwebstudio.com/public_html`
 - Future WordPress adapter: project-owned plugin, reviewed under the WordPress
   workflow before it is added or activated.
+
+Normal SEO research and platform implementation do not require the WordPress
+handoff. Normal WordPress work does not require this package. Read both scopes
+only for an explicit integration task described in `WORDPRESS-INTEGRATION.md`.
 
 This is a separate project on a shared VPS. It must not reuse the Poehali
 database, network, Redis, Codex profile or source tree. WordPress remains the
