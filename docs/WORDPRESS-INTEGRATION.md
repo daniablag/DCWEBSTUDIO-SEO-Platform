@@ -39,7 +39,8 @@ import. WordPress must not depend on the SEO PostgreSQL schema or runtime files.
   linked as translations; one language's keywords are not mechanical
   translations of the other.
 - Versioned delivery schemas will live under repository
-  `contracts/wordpress/v1/` when R0.3 defines them.
+  `contracts/wordpress/v1/`; they are intentionally deferred to the WP0/R7
+  integration design and were not part of the completed research-contract R0.3.
 
 ## Change procedure
 

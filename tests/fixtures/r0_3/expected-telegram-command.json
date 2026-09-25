@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "command_id": "00000000-0000-4000-8000-000000000084",
+  "received_at": "2026-09-25T12:24:00+03:00",
+  "channel": "telegram",
+  "actor_ref": "owner:primary",
+  "command": "plan",
+  "arguments": {
+    "plan_id": "00000000-0000-4000-8000-000000000072"
+  },
+  "mutating": false,
+  "requested_scope": "plan_only",
+  "source_message_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+  "contains_raw_message": false,
+  "validation": {
+    "valid": true,
+    "validator": "r0_contract_fixture",
+    "validator_version": "1.0.0",
+    "checked_at": "2026-09-25T12:24:01+03:00",
+    "error_count": 0,
+    "warning_count": 0,
+    "issues": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/normalized-keyword.schema.json",
+  "title": "Normalized keyword v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "keyword_id", "project_id", "locale_id", "market_id", "source_batch_id", "source_row_number", "original_phrase", "normalized_phrase", "locale_tag", "normalizer", "provenance_class", "source", "validation"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "keyword_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "locale_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "market_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "content_target_id": {"type": ["string", "null"], "format": "uuid"},
+    "source_batch_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "source_row_number": {"type": "integer", "minimum": 2},
+    "original_phrase": {"type": "string", "minLength": 1, "maxLength": 500},
+    "normalized_phrase": {"type": "string", "minLength": 1, "maxLength": 500},
+    "locale_tag": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/locale_tag"},
+    "normalizer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "rules"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"},
+        "version": {"type": "string", "minLength": 1, "maxLength": 40},
+        "rules": {"type": "array", "items": {"type": "string", "pattern": "^[a-z0-9_]{2,80}$"}, "uniqueItems": true, "minItems": 1}
+      }
+    },
+    "metrics": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["search_volume", "competition", "low_bid_minor_units", "high_bid_minor_units"],
+      "properties": {
+        "search_volume": {"type": ["integer", "null"], "minimum": 0},
+        "competition": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "low_bid_minor_units": {"type": ["integer", "null"], "minimum": 0},
+        "high_bid_minor_units": {"type": ["integer", "null"], "minimum": 0}
+      }
+    },
+    "provenance_class": {"const": "normalized"},
+    "source": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/source"},
+    "validation": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/validation_report"}
+  }
+}

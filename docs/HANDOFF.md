@@ -1,10 +1,11 @@
 # DCWEBSTUDIO SEO Platform Handoff
 
-Snapshot: 2026-09-25 14:25 Europe/Berlin
+Snapshot: 2026-09-25 19:26 Europe/Berlin
 
 ## Current state
 
-The project is in architecture and planning with source control established.
+The project has completed implementation readiness and is beginning the runtime
+foundation with source control established.
 `/opt/apps/dcwebstudio-seo` is the Git repository, and its `docs/` directory is
 the canonical documentation package. No application code, database, container,
 service, public route, runtime credentials, scheduled jobs or WordPress plugin
@@ -41,9 +42,18 @@ the checksum-verified canonical docs now live under repository `docs/`.
 visibility is an owner-approved current-stage choice and does not relax the
 deny-by-default Git rules.
 
-`ROADMAP.md` is the step-by-step execution source of truth. R0.1 and R0.2 are
-complete; R0.3 (freeze contracts and acceptance fixtures) is active. All
-runtime implementation steps remain planned and unstarted.
+`ROADMAP.md` is the step-by-step execution source of truth. R0.1–R0.3 are
+complete and the R0 exit gate passed. R1.1 (repository skeleton) is active; no
+runtime, database, container or service has been created.
+
+R0.3 added 16 transport-neutral JSON Schema Draft 2020-12 contracts under
+`contracts/` and checksum-pinned synthetic acceptance data under
+`tests/fixtures/r0_3/`. The fixtures cover URL import, separate Russian and
+Ukrainian keyword tables, deterministic normalization, an offline SERP adapter,
+page observations, immutable artifact metadata, stage planning/results,
+fail-closed provider costs, durable notification delivery and sanitized
+Telegram command/confirmation/outcome envelopes. Run
+`python3 tests/contract/test_contracts.py -v`; all 11 tests passed at handoff.
 
 The owner confirmed Ukraine as the first geography and Russian/Ukrainian as the
 first content languages. `MVP-SCOPE.md` records the resulting `ru-UA` and
@@ -137,9 +147,9 @@ state and permissions and must not expose shell, SQL, secrets or publication.
   keeping `/opt/docs/dcwebstudio-seo` as the stable routed entry point.
 
 These remain design recommendations for runtime and WordPress work. Source
-control and the documentation migration are complete; there is still no
-authorization here to activate Polylang, create containers, install packages
-or modify WordPress.
+control, documentation migration and R0 contracts are complete; there is still
+no authorization here to activate Polylang or modify WordPress. Container and
+package work must stay within the currently active R1 step and its gate.
 
 ## Reuse and cost baseline
 
@@ -169,11 +179,13 @@ upgrade triggers.
 
 ## Next action
 
-Follow `ROADMAP.md` one gate at a time. Do not begin R1 while R0 is incomplete.
+Follow `ROADMAP.md` one gate at a time.
 
-1. Complete active R0.3 by freezing version 1 contracts and synthetic acceptance
-   fixtures, including notification-event and Telegram-command envelopes.
-2. Begin R1 only after the R0 exit gate passes.
+1. Complete active R1.1: add the minimal Python/source, migration, test and
+   deploy skeleton around the already frozen contracts, with pinned tooling and
+   license/notice files.
+2. Do not begin R1.2 configuration behavior until the R1.1 acceptance checks
+   and documentation update pass.
 
 The separate WP0 track may be scheduled independently, but it is required only
 before R7 WordPress delivery. Do not activate Polylang or change WordPress as a
@@ -201,3 +213,5 @@ Recovery sets:
   `/opt/docs/config-backups-user/seo-telegram-observability-20260925-130952`.
 - R0.2 repository and canonical-doc migration:
   `/opt/docs/config-backups-user/seo-repository-migration-20260925-133957`.
+- R0.3 contracts and fixtures, pre-change repository archive:
+  `/opt/docs/config-backups-user/seo-r03-contracts-20260925-192649`.

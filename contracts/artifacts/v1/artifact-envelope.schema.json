@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/artifact-envelope.schema.json",
+  "title": "Immutable artifact envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifact_id", "artifact_type", "schema_name", "schema_version", "created_at", "provenance_class", "source", "content_hash", "validation", "context", "lineage", "retention", "payload"],
+  "properties": {
+    "artifact_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "artifact_type": {"type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$"},
+    "schema_name": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{1,80}$"},
+    "schema_version": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/schema_version"},
+    "created_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"},
+    "provenance_class": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/provenance_class"},
+    "source": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/source"},
+    "content_hash": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sha256"},
+    "validation": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/validation_report"},
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project_id"],
+      "properties": {
+        "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "locale_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "market_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "content_target_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"}
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["parent_artifacts", "run_id", "stage_run_id"],
+      "properties": {
+        "parent_artifacts": {
+          "type": "array",
+          "items": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/artifact_ref"},
+          "uniqueItems": true,
+          "maxItems": 100
+        },
+        "run_id": {"type": ["string", "null"], "format": "uuid"},
+        "stage_run_id": {"type": ["string", "null"], "format": "uuid"}
+      }
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["retention_class", "contains_raw_payload", "max_age_days", "expires_at"],
+      "properties": {
+        "retention_class": {"type": "string", "enum": ["diagnostic_7d", "operational", "historical", "immutable_audit"]},
+        "contains_raw_payload": {"type": "boolean"},
+        "max_age_days": {"type": ["integer", "null"], "minimum": 1, "maximum": 7},
+        "expires_at": {"type": ["string", "null"], "format": "date-time"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"contains_raw_payload": {"const": true}}, "required": ["contains_raw_payload"]},
+          "then": {
+            "properties": {
+              "retention_class": {"const": "diagnostic_7d"},
+              "max_age_days": {"const": 7},
+              "expires_at": {"type": "string", "format": "date-time"}
+            }
+          }
+        }
+      ]
+    },
+    "payload": {
+      "type": ["object", "array"],
+      "description": "Validated business payload; content_hash is calculated over its canonical JSON representation."
+    }
+  }
+}

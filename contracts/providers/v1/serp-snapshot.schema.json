@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/serp-snapshot.schema.json",
+  "title": "Normalized SERP snapshot v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "serp_snapshot_id", "project_id", "locale_id", "market_id", "query", "device", "collected_at", "provider", "provider_payload_hash", "results", "source", "validation"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "serp_snapshot_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "locale_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "market_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "query": {"type": "string", "minLength": 1, "maxLength": 500},
+    "device": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/device"},
+    "collected_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"},
+    "provider": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"},
+    "provider_payload_hash": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sha256"},
+    "results": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rank", "url", "domain", "title", "snippet", "result_type"],
+        "properties": {
+          "rank": {"type": "integer", "minimum": 1},
+          "url": {"type": "string", "format": "uri", "pattern": "^https?://"},
+          "domain": {"type": "string", "format": "hostname"},
+          "title": {"type": "string", "maxLength": 1000},
+          "snippet": {"type": "string", "maxLength": 3000},
+          "result_type": {"type": "string", "enum": ["organic", "local", "video", "other"]}
+        }
+      }
+    },
+    "source": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/source"},
+    "validation": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/validation_report"}
+  }
+}

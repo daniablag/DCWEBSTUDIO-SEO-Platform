@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/cost-estimate.schema.json",
+  "title": "Provider cost class and upper-bound estimate v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "estimate_id", "stage_name", "provider", "cost_class", "unit", "estimated_units", "pricing_source", "currency", "upper_bound_minor_units", "budget", "approval_status", "enqueue_allowed", "blocked_reasons", "estimated_at"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "estimate_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "stage_name": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,80}$"},
+    "provider": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"},
+    "cost_class": {"type": "string", "enum": ["free", "quota_limited", "paid", "unknown"]},
+    "unit": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{1,63}$"},
+    "estimated_units": {"type": "integer", "minimum": 0},
+    "pricing_source": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["source_uri", "price_version", "checked_at"],
+      "properties": {
+        "source_uri": {"type": "string", "format": "uri"},
+        "price_version": {"type": "string", "minLength": 1, "maxLength": 100},
+        "checked_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"}
+      }
+    },
+    "currency": {"type": ["string", "null"], "pattern": "^[A-Z]{3}$"},
+    "upper_bound_minor_units": {"type": ["integer", "null"], "minimum": 0},
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["per_job_remaining_minor_units", "daily_remaining_minor_units", "monthly_remaining_minor_units"],
+      "properties": {
+        "per_job_remaining_minor_units": {"type": ["integer", "null"], "minimum": 0},
+        "daily_remaining_minor_units": {"type": ["integer", "null"], "minimum": 0},
+        "monthly_remaining_minor_units": {"type": ["integer", "null"], "minimum": 0}
+      }
+    },
+    "approval_status": {"type": "string", "enum": ["not_required", "pending", "approved", "rejected"]},
+    "enqueue_allowed": {"type": "boolean"},
+    "blocked_reasons": {
+      "type": "array",
+      "items": {"type": "string", "enum": ["unknown_price", "missing_price_source", "missing_budget", "budget_exceeded", "approval_required", "approval_rejected", "provider_disabled"]},
+      "uniqueItems": true
+    },
+    "estimated_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"cost_class": {"const": "free"}}},
+      "then": {
+        "properties": {
+          "upper_bound_minor_units": {"const": 0},
+          "approval_status": {"const": "not_required"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"cost_class": {"const": "paid"}}},
+      "then": {
+        "properties": {
+          "pricing_source": {"type": "object"},
+          "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+          "upper_bound_minor_units": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"cost_class": {"const": "unknown"}}},
+      "then": {
+        "properties": {
+          "enqueue_allowed": {"const": false},
+          "blocked_reasons": {"contains": {"const": "unknown_price"}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"enqueue_allowed": {"const": true}}},
+      "then": {
+        "properties": {
+          "cost_class": {"enum": ["free", "quota_limited", "paid"]},
+          "blocked_reasons": {"maxItems": 0},
+          "approval_status": {"enum": ["not_required", "approved"]}
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "batch_id": "00000000-0000-4000-8000-000000000042",
+  "project_id": "00000000-0000-4000-8000-000000000001",
+  "locale_id": "00000000-0000-4000-8000-000000000010",
+  "market_id": "00000000-0000-4000-8000-000000000020",
+  "content_target_id": "00000000-0000-4000-8000-000000000031",
+  "source": {
+    "source_type": "owner_supplied",
+    "actor_ref": "owner:primary",
+    "recorded_at": "2026-09-25T12:00:00+03:00",
+    "source_uri": "file:///synthetic/url-list.txt",
+    "original_hash": "sha256:1e1cf127772980ca40976c819125ae2b672b317b7134d5589cf3779df70c16e7",
+    "parent_artifact_ids": []
+  },
+  "rows": [
+    {"row_number": 1, "url": "https://competitor-a.example.test/services/automation", "url_role": "competitor", "requested_action": "compare", "label": "Synthetic competitor A"},
+    {"row_number": 2, "url": "https://competitor-b.example.test/solutions/crm", "url_role": "competitor", "requested_action": "compare", "label": "Synthetic competitor B"},
+    {"row_number": 3, "url": "https://studio.example.test/services/business-automation", "url_role": "owned", "requested_action": "audit", "label": "Synthetic owned page"}
+  ],
+  "validation": {
+    "valid": true,
+    "validator": "r0_contract_fixture",
+    "validator_version": "1.0.0",
+    "checked_at": "2026-09-25T12:01:00+03:00",
+    "error_count": 0,
+    "warning_count": 0,
+    "issues": []
+  }
+}

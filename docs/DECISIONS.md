@@ -225,3 +225,18 @@ The separately reviewed `/opt/apps/codex-telegram` service may route the owner
 to isolated site and SEO development threads. That administrative convenience
 does not implement this decision's application notifier or command adapter and
 does not permit the SEO runtime to reuse its bot identity, state or privileges.
+
+## D-019 — Transport-neutral v1 contracts before framework code
+
+Status: accepted and implemented, 2026-09-25.
+
+Freeze boundary objects as strict JSON Schema Draft 2020-12 documents before
+choosing the application framework, ORM or queue representation. Version 1
+covers identities, manual imports, immutable artifacts, observations, provider
+costs, run/stage state, notifications and Telegram operator envelopes.
+
+Keep synthetic `.test` fixtures and deterministic offline checks beside the
+contracts. Incompatible changes require a new version; application and database
+implementations may add internal fields only behind adapters and must continue
+to emit valid public contract objects. Raw HTML, real provider dumps, secrets
+and original Telegram text remain outside these fixtures and Git.

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "estimate_id": "00000000-0000-4000-8000-000000000071",
+  "stage_name": "normalize_keywords",
+  "provider": "local_normalizer",
+  "cost_class": "free",
+  "unit": "keyword_row",
+  "estimated_units": 6,
+  "pricing_source": null,
+  "currency": null,
+  "upper_bound_minor_units": 0,
+  "budget": {
+    "per_job_remaining_minor_units": null,
+    "daily_remaining_minor_units": null,
+    "monthly_remaining_minor_units": null
+  },
+  "approval_status": "not_required",
+  "enqueue_allowed": true,
+  "blocked_reasons": [],
+  "estimated_at": "2026-09-25T12:17:00+03:00"
+}

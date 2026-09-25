@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/notification-event.schema.json",
+  "title": "Sanitized durable notification event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "event_id", "occurred_at", "severity", "code", "summary", "correlation", "deduplication_key", "occurrence_count", "state", "contains_sensitive_data"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "event_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "occurred_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"},
+    "severity": {"type": "string", "enum": ["info", "warning", "error", "critical"]},
+    "code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+    "summary": {"type": "string", "minLength": 1, "maxLength": 500},
+    "correlation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["correlation_id", "run_id", "job_id", "stage_run_id"],
+      "properties": {
+        "correlation_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "run_id": {"type": ["string", "null"], "format": "uuid"},
+        "job_id": {"type": ["string", "null"], "format": "uuid"},
+        "stage_run_id": {"type": ["string", "null"], "format": "uuid"}
+      }
+    },
+    "deduplication_key": {"type": "string", "pattern": "^[a-z0-9][a-z0-9:._-]{2,160}$"},
+    "occurrence_count": {"type": "integer", "minimum": 1},
+    "state": {"type": "string", "enum": ["pending", "delivering", "delivered", "dead"]},
+    "contains_sensitive_data": {"const": false}
+  }
+}

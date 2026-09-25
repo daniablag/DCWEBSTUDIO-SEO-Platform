@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/page-observation.schema.json",
+  "title": "Page observation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "observation_id", "project_id", "locale_id", "market_id", "source_page_id", "observed_at", "requested_url", "final_url", "http_status", "robots_decision", "content_hash", "signals", "diagnostic_raw_expires_at", "diagnostic_raw_retention_days", "source", "validation"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "observation_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "locale_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "market_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "content_target_id": {"type": ["string", "null"], "format": "uuid"},
+    "source_page_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "observed_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"},
+    "requested_url": {"type": "string", "format": "uri", "pattern": "^https?://"},
+    "final_url": {"type": "string", "format": "uri", "pattern": "^https?://"},
+    "http_status": {"type": "integer", "minimum": 100, "maximum": 599},
+    "robots_decision": {"type": "string", "enum": ["allowed", "disallowed", "not_applicable", "error"]},
+    "content_hash": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sha256"},
+    "detected_locale": {"type": ["string", "null"], "pattern": "^[a-z]{2,3}(?:-[A-Z][A-Za-z0-9]{1,7})*$"},
+    "signals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "meta_description", "canonical_url", "headings", "schema_types", "internal_link_count", "external_link_count", "main_text_word_count"],
+      "properties": {
+        "title": {"type": ["string", "null"], "maxLength": 1000},
+        "meta_description": {"type": ["string", "null"], "maxLength": 2000},
+        "canonical_url": {"type": ["string", "null"], "format": "uri"},
+        "headings": {
+          "type": "array",
+          "maxItems": 500,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["level", "text"],
+            "properties": {
+              "level": {"type": "integer", "minimum": 1, "maximum": 6},
+              "text": {"type": "string", "minLength": 1, "maxLength": 1000}
+            }
+          }
+        },
+        "schema_types": {"type": "array", "items": {"type": "string", "maxLength": 120}, "uniqueItems": true, "maxItems": 100},
+        "internal_link_count": {"type": "integer", "minimum": 0},
+        "external_link_count": {"type": "integer", "minimum": 0},
+        "main_text_word_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "diagnostic_raw_expires_at": {"type": ["string", "null"], "format": "date-time"},
+    "diagnostic_raw_retention_days": {"type": ["integer", "null"], "minimum": 1, "maximum": 7},
+    "source": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/source"},
+    "validation": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/validation_report"}
+  }
+}

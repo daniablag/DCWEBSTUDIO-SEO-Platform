@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json",
+  "title": "DCWEBSTUDIO SEO common contract types v1",
+  "$defs": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+    },
+    "locale_tag": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(?:-[A-Z][A-Za-z0-9]{1,7})*$"
+    },
+    "language_code": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}$"
+    },
+    "country_code": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "currency_code": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "device": {
+      "type": "string",
+      "enum": ["desktop", "mobile", "unspecified"]
+    },
+    "provenance_class": {
+      "type": "string",
+      "enum": ["observed", "normalized", "derived", "suggested", "approved", "published"]
+    },
+    "actor_ref": {
+      "type": "string",
+      "pattern": "^(owner|system|agent|provider):[A-Za-z0-9._-]{1,80}$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_type", "actor_ref", "recorded_at"],
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": ["owner_supplied", "provider", "fetched", "derived", "generated", "system"]
+        },
+        "actor_ref": {"$ref": "#/$defs/actor_ref"},
+        "recorded_at": {"$ref": "#/$defs/timestamp"},
+        "source_uri": {"type": "string", "format": "uri", "maxLength": 2048},
+        "provider": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"},
+        "original_hash": {"$ref": "#/$defs/sha256"},
+        "parent_artifact_ids": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/uuid"},
+          "uniqueItems": true,
+          "maxItems": 100
+        }
+      }
+    },
+    "validation_issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "path", "message"],
+      "properties": {
+        "code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+        "severity": {"type": "string", "enum": ["error", "warning"]},
+        "path": {"type": "string", "maxLength": 300},
+        "row_number": {"type": "integer", "minimum": 1},
+        "message": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    },
+    "validation_report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valid", "validator", "validator_version", "checked_at", "error_count", "warning_count", "issues"],
+      "properties": {
+        "valid": {"type": "boolean"},
+        "validator": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"},
+        "validator_version": {"type": "string", "minLength": 1, "maxLength": 40},
+        "checked_at": {"$ref": "#/$defs/timestamp"},
+        "error_count": {"type": "integer", "minimum": 0},
+        "warning_count": {"type": "integer", "minimum": 0},
+        "issues": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/validation_issue"},
+          "maxItems": 1000
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"valid": {"const": true}}, "required": ["valid"]},
+          "then": {"properties": {"error_count": {"const": 0}}}
+        }
+      ]
+    },
+    "artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "artifact_type", "schema_version", "content_hash"],
+      "properties": {
+        "artifact_id": {"$ref": "#/$defs/uuid"},
+        "artifact_type": {"type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$"},
+        "schema_version": {"$ref": "#/$defs/schema_version"},
+        "content_hash": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "sanitized_error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "category", "message", "retryable"],
+      "properties": {
+        "code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+        "category": {
+          "type": "string",
+          "enum": ["validation", "policy", "provider", "network", "timeout", "budget", "approval", "internal"]
+        },
+        "message": {"type": "string", "minLength": 1, "maxLength": 500},
+        "retryable": {"type": "boolean"}
+      }
+    }
+  }
+}

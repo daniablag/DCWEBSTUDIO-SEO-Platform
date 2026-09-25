@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "outcome_id": "00000000-0000-4000-8000-000000000086",
+  "command_id": "00000000-0000-4000-8000-000000000084",
+  "completed_at": "2026-09-25T12:24:02+03:00",
+  "status": "completed",
+  "plan_id": "00000000-0000-4000-8000-000000000072",
+  "run_id": null,
+  "artifact_ids": [],
+  "audit_event_id": "00000000-0000-4000-8000-000000000087",
+  "side_effects": ["plan_created"],
+  "error": null
+}

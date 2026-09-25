@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "batch_id": "00000000-0000-4000-8000-000000000040",
+  "project_id": "00000000-0000-4000-8000-000000000001",
+  "locale_id": "00000000-0000-4000-8000-000000000010",
+  "market_id": "00000000-0000-4000-8000-000000000020",
+  "content_target_id": "00000000-0000-4000-8000-000000000031",
+  "source": {
+    "source_type": "owner_supplied",
+    "actor_ref": "owner:primary",
+    "recorded_at": "2026-09-25T12:05:00+03:00",
+    "source_uri": "file:///synthetic/keywords-ru.csv",
+    "original_hash": "sha256:e91f8d964e1f84b7dcd9cae7110012b7d5bd7072272886990c289c3cc028256f",
+    "parent_artifact_ids": []
+  },
+  "file": {
+    "name": "keywords-ru.csv",
+    "media_type": "text/csv",
+    "encoding": "utf-8",
+    "delimiter": ",",
+    "has_header": true,
+    "original_hash": "sha256:e91f8d964e1f84b7dcd9cae7110012b7d5bd7072272886990c289c3cc028256f"
+  },
+  "column_mapping": {
+    "phrase": "phrase",
+    "locale_tag": "locale_tag",
+    "target_url": "target_url"
+  },
+  "rows": [
+    {"row_number": 2, "phrase": "  Автоматизация БИЗНЕС-процессов  ", "locale_tag": "ru-UA", "search_volume": null, "competition": null, "low_bid_minor_units": null, "high_bid_minor_units": null, "target_url": "https://studio.example.test/services/business-automation"},
+    {"row_number": 3, "phrase": "CRM для отдела продаж", "locale_tag": "ru-UA", "search_volume": null, "competition": null, "low_bid_minor_units": null, "high_bid_minor_units": null, "target_url": "https://studio.example.test/services/business-automation"},
+    {"row_number": 4, "phrase": "внедрение crm украина", "locale_tag": "ru-UA", "search_volume": null, "competition": null, "low_bid_minor_units": null, "high_bid_minor_units": null, "target_url": "https://studio.example.test/services/business-automation"}
+  ],
+  "validation": {
+    "valid": true,
+    "validator": "r0_contract_fixture",
+    "validator_version": "1.0.0",
+    "checked_at": "2026-09-25T12:06:00+03:00",
+    "error_count": 0,
+    "warning_count": 0,
+    "issues": []
+  }
+}

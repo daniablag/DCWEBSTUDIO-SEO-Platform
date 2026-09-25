@@ -5,9 +5,10 @@ planning and controlled content-generation platform for `dcwebstudio.com`.
 
 ## Status
 
-Planning and source-control foundation only. Canonical documentation is tracked
-in the project repository, but there is no runtime, Compose stack, database,
-WordPress plugin, runtime credential set or scheduler.
+Implementation-readiness contracts and source-control foundation are complete.
+Canonical documentation, version 1 schemas and synthetic acceptance fixtures
+are tracked in the repository, but there is no runtime, Compose stack,
+database, WordPress plugin, runtime credential set or scheduler.
 
 ## Session start
 

@@ -1,0 +1,3 @@
+https://competitor-a.example.test/services/automation
+https://competitor-b.example.test/solutions/crm
+https://studio.example.test/services/business-automation

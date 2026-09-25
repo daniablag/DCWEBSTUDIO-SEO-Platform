@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "delivery_id": "00000000-0000-4000-8000-000000000083",
+  "event_id": "00000000-0000-4000-8000-000000000080",
+  "channel": "telegram",
+  "attempt": 1,
+  "state": "succeeded",
+  "attempted_at": "2026-09-25T12:22:05+03:00",
+  "completed_at": "2026-09-25T12:22:06+03:00",
+  "provider_reference_redacted": "synthetic-message-001",
+  "error": null,
+  "next_retry_at": null
+}

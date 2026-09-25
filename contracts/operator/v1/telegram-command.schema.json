@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/telegram-command.schema.json",
+  "title": "Normalized SEO Telegram command v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "command_id", "received_at", "channel", "actor_ref", "command", "arguments", "mutating", "requested_scope", "source_message_hash", "contains_raw_message", "validation"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "command_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "received_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"},
+    "channel": {"const": "telegram"},
+    "actor_ref": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/actor_ref"},
+    "command": {"type": "string", "enum": ["status", "jobs", "run", "errors", "plan_status", "plan", "confirm", "cancel"]},
+    "arguments": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {"type": "string", "format": "uuid"},
+        "job_id": {"type": "string", "format": "uuid"},
+        "plan_id": {"type": "string", "format": "uuid"},
+        "confirmation_id": {"type": "string", "format": "uuid"},
+        "limit": {"type": "integer", "minimum": 1, "maximum": 100},
+        "severity": {"type": "string", "enum": ["warning", "error", "critical"]}
+      }
+    },
+    "mutating": {"type": "boolean"},
+    "requested_scope": {"type": "string", "enum": ["read_only", "plan_only", "enqueue", "cancel_job"]},
+    "source_message_hash": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sha256"},
+    "contains_raw_message": {"const": false},
+    "validation": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/validation_report"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"command": {"enum": ["status", "jobs", "run", "errors", "plan_status"]}}},
+      "then": {"properties": {"mutating": {"const": false}, "requested_scope": {"const": "read_only"}}}
+    },
+    {
+      "if": {"properties": {"command": {"enum": ["confirm", "cancel"]}}},
+      "then": {"properties": {"mutating": {"const": true}}}
+    }
+  ]
+}

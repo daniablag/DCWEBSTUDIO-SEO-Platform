@@ -1,0 +1,25 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "expected-artifact-envelope.json": "sha256:9e704504fc75de144e7081376d4d1fbec2862664e2573245eb1e25129225d5fb",
+    "expected-cost-estimate.json": "sha256:5e80a73f94990f6260cb2dbe668bfe0846ff8ffca5b9a5633361219dcbed9119",
+    "expected-keyword-table-ru.json": "sha256:dd84ef67e6888cb10cf3b48172715ec676c04de988bbc9a94379a237552a2370",
+    "expected-keyword-table-uk.json": "sha256:8259ad5292cc8e8c35645c52aa95ae126f270f78dbcb0ed69b0bb8fd9ec1b51f",
+    "expected-normalized-keywords.json": "sha256:b224b4ec6f022b2b53e7a81acb8309b3f6fd9606a73072b416eddfb9f025af02",
+    "expected-notification-delivery.json": "sha256:1899a50467e739bfcd936632600aa47611f004cf5207f849729fc2117aad2119",
+    "expected-notification-event.json": "sha256:3988416ab3b4fe64fd3edc7ac8fa6711d81f873446f1c2afaed9d82702e2748b",
+    "expected-page-observation.json": "sha256:8cbb433d42f230f053e37cdd581350d992cc1d3a4b5384a3d76895191d7292c1",
+    "expected-run-plan.json": "sha256:e788f11a9d80b48b5cef44b187bcaa8fa1c97cbcc19cc66dbf0d04ff0ac0cc9f",
+    "expected-serp-snapshot.json": "sha256:7e37be32237c3594e09c8eca49d9ba3b9a7487fae3673f0e299dba7700ff06f8",
+    "expected-stage-result.json": "sha256:48d62be954dfa4a691b49e6d401020ae6cfc4783468de25430d5f9d573fb5ca2",
+    "expected-telegram-command.json": "sha256:d3ee450000078be6c2920662813863654433349086a951f47f34de893c927e6a",
+    "expected-telegram-confirmation.json": "sha256:2742d929f9b54f963411de2587f868126d14cf808f5bc3ba83749ed0de76add7",
+    "expected-telegram-outcome.json": "sha256:dc399ab7e7fa190e1c246dc669fe49ae8d290b0e2358e9f3f1afed63cc7c05fa",
+    "expected-url-batch.json": "sha256:7659e64c3f42504009a279cc9506977d115bdec06bb4fb0f96a244805ad1b3a9",
+    "identity-records.json": "sha256:a0183529d69252ca0a5e3d8cb92e098b1c8228d874e248a14fc513aeb6b35a13",
+    "keywords-ru.csv": "sha256:e91f8d964e1f84b7dcd9cae7110012b7d5bd7072272886990c289c3cc028256f",
+    "keywords-uk.csv": "sha256:f79d20ab6d957afa20ac3c166be44750322913228812b51fe637205df48f2a27",
+    "offline-serp-response.json": "sha256:15cb99915e615bf4b2628f1ad3a27fcb03ba228a2ccb74370cfda3941e685378",
+    "url-list.txt": "sha256:1e1cf127772980ca40976c819125ae2b672b317b7134d5589cf3779df70c16e7"
+  }
+}

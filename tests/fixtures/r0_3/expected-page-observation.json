@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "observation_id": "00000000-0000-4000-8000-000000000061",
+  "project_id": "00000000-0000-4000-8000-000000000001",
+  "locale_id": "00000000-0000-4000-8000-000000000010",
+  "market_id": "00000000-0000-4000-8000-000000000020",
+  "content_target_id": "00000000-0000-4000-8000-000000000031",
+  "source_page_id": "00000000-0000-4000-8000-000000000062",
+  "observed_at": "2026-09-25T12:14:00+03:00",
+  "requested_url": "https://competitor-a.example.test/services/automation",
+  "final_url": "https://competitor-a.example.test/services/automation",
+  "http_status": 200,
+  "robots_decision": "allowed",
+  "content_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "detected_locale": "ru-UA",
+  "signals": {
+    "title": "Автоматизация процессов — пример A",
+    "meta_description": "Синтетическое описание страницы.",
+    "canonical_url": "https://competitor-a.example.test/services/automation",
+    "headings": [
+      {"level": 1, "text": "Автоматизация бизнес-процессов"},
+      {"level": 2, "text": "Возможности"}
+    ],
+    "schema_types": ["Service", "WebPage"],
+    "internal_link_count": 7,
+    "external_link_count": 1,
+    "main_text_word_count": 420
+  },
+  "diagnostic_raw_expires_at": "2026-10-02T12:14:00+03:00",
+  "diagnostic_raw_retention_days": 7,
+  "source": {
+    "source_type": "fetched",
+    "actor_ref": "system:crawler",
+    "recorded_at": "2026-09-25T12:14:00+03:00",
+    "source_uri": "https://competitor-a.example.test/services/automation",
+    "parent_artifact_ids": ["00000000-0000-4000-8000-000000000042"]
+  },
+  "validation": {
+    "valid": true,
+    "validator": "r0_contract_fixture",
+    "validator_version": "1.0.0",
+    "checked_at": "2026-09-25T12:14:01+03:00",
+    "error_count": 0,
+    "warning_count": 0,
+    "issues": []
+  }
+}

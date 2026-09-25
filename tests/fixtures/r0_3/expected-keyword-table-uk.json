@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "batch_id": "00000000-0000-4000-8000-000000000041",
+  "project_id": "00000000-0000-4000-8000-000000000001",
+  "locale_id": "00000000-0000-4000-8000-000000000011",
+  "market_id": "00000000-0000-4000-8000-000000000022",
+  "content_target_id": "00000000-0000-4000-8000-000000000032",
+  "source": {
+    "source_type": "owner_supplied",
+    "actor_ref": "owner:primary",
+    "recorded_at": "2026-09-25T12:07:00+03:00",
+    "source_uri": "file:///synthetic/keywords-uk.csv",
+    "original_hash": "sha256:f79d20ab6d957afa20ac3c166be44750322913228812b51fe637205df48f2a27",
+    "parent_artifact_ids": []
+  },
+  "file": {
+    "name": "keywords-uk.csv",
+    "media_type": "text/csv",
+    "encoding": "utf-8",
+    "delimiter": ",",
+    "has_header": true,
+    "original_hash": "sha256:f79d20ab6d957afa20ac3c166be44750322913228812b51fe637205df48f2a27"
+  },
+  "column_mapping": {
+    "phrase": "phrase",
+    "locale_tag": "locale_tag",
+    "target_url": "target_url"
+  },
+  "rows": [
+    {"row_number": 2, "phrase": "Автоматизація бізнес-процесів", "locale_tag": "uk-UA", "search_volume": null, "competition": null, "low_bid_minor_units": null, "high_bid_minor_units": null, "target_url": "https://studio.example.test/uk/services/avtomatyzatsiia-biznesu"},
+    {"row_number": 3, "phrase": "CRM для відділу продажів", "locale_tag": "uk-UA", "search_volume": null, "competition": null, "low_bid_minor_units": null, "high_bid_minor_units": null, "target_url": "https://studio.example.test/uk/services/avtomatyzatsiia-biznesu"},
+    {"row_number": 4, "phrase": "впровадження crm в україні", "locale_tag": "uk-UA", "search_volume": null, "competition": null, "low_bid_minor_units": null, "high_bid_minor_units": null, "target_url": "https://studio.example.test/uk/services/avtomatyzatsiia-biznesu"}
+  ],
+  "validation": {
+    "valid": true,
+    "validator": "r0_contract_fixture",
+    "validator_version": "1.0.0",
+    "checked_at": "2026-09-25T12:08:00+03:00",
+    "error_count": 0,
+    "warning_count": 0,
+    "issues": []
+  }
+}

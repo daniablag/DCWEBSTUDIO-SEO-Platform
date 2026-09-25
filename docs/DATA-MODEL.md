@@ -2,6 +2,12 @@
 
 ## Principles
 
+The transport-neutral v1 boundary contracts under repository `contracts/` are
+the executable source of truth for R0.3 interchange shapes. This document
+describes the intended persistence model; later migrations may choose storage
+details but must preserve those contract semantics or introduce a reviewed new
+contract version.
+
 - PostgreSQL is authoritative; WordPress is the publication projection.
 - Keep observations, metrics, derived decisions and generated artifacts apart.
 - Every mutable business artifact has a lifecycle state and audit trail.

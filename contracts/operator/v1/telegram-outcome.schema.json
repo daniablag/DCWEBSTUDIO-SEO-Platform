@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/telegram-outcome.schema.json",
+  "title": "Audited Telegram command outcome v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "outcome_id", "command_id", "completed_at", "status", "plan_id", "run_id", "artifact_ids", "audit_event_id", "side_effects", "error"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "outcome_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "command_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "completed_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"},
+    "status": {"type": "string", "enum": ["completed", "accepted", "rejected", "failed"]},
+    "plan_id": {"type": ["string", "null"], "format": "uuid"},
+    "run_id": {"type": ["string", "null"], "format": "uuid"},
+    "artifact_ids": {"type": "array", "items": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"}, "uniqueItems": true, "maxItems": 100},
+    "audit_event_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "side_effects": {"type": "array", "items": {"type": "string", "enum": ["none", "plan_created", "job_enqueued", "job_cancelled", "project_database_write"]}, "uniqueItems": true},
+    "error": {"oneOf": [{"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sanitized_error"}, {"type": "null"}]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "failed"}}},
+      "then": {"properties": {"error": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sanitized_error"}}}
+    },
+    {
+      "if": {"properties": {"status": {"enum": ["completed", "accepted"]}}},
+      "then": {"properties": {"error": {"type": "null"}}}
+    }
+  ]
+}

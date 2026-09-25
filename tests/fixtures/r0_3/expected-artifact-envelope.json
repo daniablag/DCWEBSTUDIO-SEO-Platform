@@ -1,0 +1,53 @@
+{
+  "artifact_id": "00000000-0000-4000-8000-000000000070",
+  "artifact_type": "keyword_summary",
+  "schema_name": "keyword-summary",
+  "schema_version": "1.0.0",
+  "created_at": "2026-09-25T12:16:00+03:00",
+  "provenance_class": "derived",
+  "source": {
+    "source_type": "derived",
+    "actor_ref": "system:fixture_builder",
+    "recorded_at": "2026-09-25T12:16:00+03:00",
+    "parent_artifact_ids": [
+      "00000000-0000-4000-8000-000000000040",
+      "00000000-0000-4000-8000-000000000041"
+    ]
+  },
+  "content_hash": "sha256:7d9184d937261c6fe4313f20d62ba936f12425662680f8fad59aab10642befd4",
+  "validation": {
+    "valid": true,
+    "validator": "r0_contract_fixture",
+    "validator_version": "1.0.0",
+    "checked_at": "2026-09-25T12:16:01+03:00",
+    "error_count": 0,
+    "warning_count": 0,
+    "issues": []
+  },
+  "context": {
+    "project_id": "00000000-0000-4000-8000-000000000001",
+    "content_target_id": "00000000-0000-4000-8000-000000000031"
+  },
+  "lineage": {
+    "parent_artifacts": [
+      {
+        "artifact_id": "00000000-0000-4000-8000-000000000040",
+        "artifact_type": "keyword_table",
+        "schema_version": "1.0.0",
+        "content_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    ],
+    "run_id": null,
+    "stage_run_id": null
+  },
+  "retention": {
+    "retention_class": "historical",
+    "contains_raw_payload": false,
+    "max_age_days": null,
+    "expires_at": null
+  },
+  "payload": {
+    "keyword_count": 6,
+    "locale_tags": ["ru-UA", "uk-UA"]
+  }
+}

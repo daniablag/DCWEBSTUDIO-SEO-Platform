@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/url-batch.schema.json",
+  "title": "URL batch import v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "batch_id", "project_id", "locale_id", "market_id", "source", "rows", "validation"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "batch_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "locale_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "market_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "content_target_id": {"type": ["string", "null"], "format": "uuid"},
+    "source": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/source"},
+    "rows": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["row_number", "url", "url_role", "requested_action"],
+        "properties": {
+          "row_number": {"type": "integer", "minimum": 1},
+          "url": {"type": "string", "format": "uri", "pattern": "^https?://", "maxLength": 2048},
+          "url_role": {"type": "string", "enum": ["owned", "competitor", "seed", "unknown"]},
+          "requested_action": {"type": "string", "enum": ["crawl", "audit", "compare"]},
+          "label": {"type": ["string", "null"], "maxLength": 160}
+        }
+      }
+    },
+    "validation": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/validation_report"}
+  }
+}

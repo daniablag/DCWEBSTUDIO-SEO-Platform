@@ -1,0 +1,151 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "entity_type": "project",
+    "data": {
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "project_key": "synthetic-seo-fixture",
+      "canonical_origin": "https://studio.example.test",
+      "default_timezone": "Europe/Kyiv",
+      "state": "active"
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "entity_type": "locale",
+    "data": {
+      "locale_id": "00000000-0000-4000-8000-000000000010",
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "bcp47_tag": "ru-UA",
+      "language_code": "ru",
+      "region_code": "UA",
+      "wordpress_locale": null,
+      "polylang_slug": "ru",
+      "is_default": true,
+      "state": "planned"
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "entity_type": "locale",
+    "data": {
+      "locale_id": "00000000-0000-4000-8000-000000000011",
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "bcp47_tag": "uk-UA",
+      "language_code": "uk",
+      "region_code": "UA",
+      "wordpress_locale": null,
+      "polylang_slug": "uk",
+      "is_default": false,
+      "state": "planned"
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "entity_type": "market",
+    "data": {
+      "market_id": "00000000-0000-4000-8000-000000000020",
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "locale_id": "00000000-0000-4000-8000-000000000010",
+      "country_code": "UA",
+      "region": null,
+      "device": "desktop",
+      "search_engine": "google",
+      "network": "organic",
+      "timezone": "Europe/Kyiv",
+      "currency": "UAH",
+      "state": "active"
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "entity_type": "market",
+    "data": {
+      "market_id": "00000000-0000-4000-8000-000000000021",
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "locale_id": "00000000-0000-4000-8000-000000000010",
+      "country_code": "UA",
+      "region": null,
+      "device": "mobile",
+      "search_engine": "google",
+      "network": "organic",
+      "timezone": "Europe/Kyiv",
+      "currency": "UAH",
+      "state": "active"
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "entity_type": "market",
+    "data": {
+      "market_id": "00000000-0000-4000-8000-000000000022",
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "locale_id": "00000000-0000-4000-8000-000000000011",
+      "country_code": "UA",
+      "region": null,
+      "device": "desktop",
+      "search_engine": "google",
+      "network": "organic",
+      "timezone": "Europe/Kyiv",
+      "currency": "UAH",
+      "state": "active"
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "entity_type": "market",
+    "data": {
+      "market_id": "00000000-0000-4000-8000-000000000023",
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "locale_id": "00000000-0000-4000-8000-000000000011",
+      "country_code": "UA",
+      "region": null,
+      "device": "mobile",
+      "search_engine": "google",
+      "network": "organic",
+      "timezone": "Europe/Kyiv",
+      "currency": "UAH",
+      "state": "active"
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "entity_type": "content_unit",
+    "data": {
+      "content_unit_id": "00000000-0000-4000-8000-000000000030",
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "content_kind": "service",
+      "state": "planned"
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "entity_type": "content_target",
+    "data": {
+      "content_target_id": "00000000-0000-4000-8000-000000000031",
+      "content_unit_id": "00000000-0000-4000-8000-000000000030",
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "locale_id": "00000000-0000-4000-8000-000000000010",
+      "target_kind": "existing",
+      "canonical_url": "https://studio.example.test/services/business-automation",
+      "proposed_path": null,
+      "primary_market_id": "00000000-0000-4000-8000-000000000020",
+      "state": "researched"
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "entity_type": "content_target",
+    "data": {
+      "content_target_id": "00000000-0000-4000-8000-000000000032",
+      "content_unit_id": "00000000-0000-4000-8000-000000000030",
+      "project_id": "00000000-0000-4000-8000-000000000001",
+      "locale_id": "00000000-0000-4000-8000-000000000011",
+      "target_kind": "proposed",
+      "canonical_url": null,
+      "proposed_path": "/uk/services/avtomatyzatsiia-biznesu/",
+      "primary_market_id": "00000000-0000-4000-8000-000000000022",
+      "state": "planned"
+    }
+  }
+]

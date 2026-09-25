@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/run-plan.schema.json",
+  "title": "Dry-run workflow plan v1",
+  "$defs": {
+    "approval_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approval_type", "required", "status", "actor_role", "approval_id"],
+      "properties": {
+        "approval_type": {"type": "string", "enum": ["none", "input_acceptance", "cluster_mapping", "provider_budget", "brief", "draft_delivery"]},
+        "required": {"type": "boolean"},
+        "status": {"type": "string", "enum": ["not_required", "pending", "approved", "rejected"]},
+        "actor_role": {"type": ["string", "null"], "enum": ["project_owner", "content_reviewer", "publisher", null]},
+        "approval_id": {"type": ["string", "null"], "format": "uuid"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"required": {"const": false}}},
+          "then": {"properties": {"approval_type": {"const": "none"}, "status": {"const": "not_required"}}}
+        }
+      ]
+    },
+    "skipped_stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason_code", "explanation", "supplied_artifact_id"],
+      "properties": {
+        "reason_code": {"type": "string", "enum": ["owner_supplied", "not_requested", "existing_approved_artifact", "outside_stop_boundary", "not_applicable"]},
+        "explanation": {"type": "string", "minLength": 1, "maxLength": 500},
+        "supplied_artifact_id": {"type": ["string", "null"], "format": "uuid"}
+      }
+    },
+    "stage_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sequence", "stage_name", "stage_version", "action", "input_artifacts", "expected_output_types", "side_effects", "external_calls", "cost", "approval", "skip"],
+      "properties": {
+        "sequence": {"type": "integer", "minimum": 1},
+        "stage_name": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,80}$"},
+        "stage_version": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$"},
+        "action": {"type": "string", "enum": ["execute", "skip"]},
+        "input_artifacts": {"type": "array", "items": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/artifact_ref"}, "maxItems": 100},
+        "expected_output_types": {"type": "array", "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$"}, "uniqueItems": true, "maxItems": 50},
+        "side_effects": {"type": "array", "items": {"type": "string", "enum": ["project_database_write", "filesystem_artifact_write", "external_http_read", "provider_request", "wordpress_draft_write"]}, "uniqueItems": true},
+        "external_calls": {"type": "array", "items": {"type": "string", "maxLength": 120}, "uniqueItems": true},
+        "cost": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/cost-estimate.schema.json"},
+        "approval": {"$ref": "#/$defs/approval_requirement"},
+        "skip": {"oneOf": [{"$ref": "#/$defs/skipped_stage"}, {"type": "null"}]}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"action": {"const": "skip"}}},
+          "then": {
+            "properties": {
+              "skip": {"$ref": "#/$defs/skipped_stage"},
+              "side_effects": {"maxItems": 0},
+              "external_calls": {"maxItems": 0},
+              "expected_output_types": {"maxItems": 0}
+            }
+          },
+          "else": {"properties": {"skip": {"type": "null"}}}
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "plan_id", "project_id", "requested_by", "created_at", "expires_at", "input_artifacts", "start_stage", "stop_stage", "resolve_missing_upstream", "stages", "status", "plan_hash"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "plan_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "requested_by": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/actor_ref"},
+    "created_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"},
+    "expires_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"},
+    "input_artifacts": {"type": "array", "items": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/artifact_ref"}, "minItems": 1, "maxItems": 100},
+    "start_stage": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,80}$"},
+    "stop_stage": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,80}$"},
+    "resolve_missing_upstream": {"const": false},
+    "stages": {"type": "array", "items": {"$ref": "#/$defs/stage_plan"}, "minItems": 1, "maxItems": 100},
+    "status": {"type": "string", "enum": ["draft", "validated", "approved", "rejected", "expired"]},
+    "plan_hash": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sha256"}
+  }
+}

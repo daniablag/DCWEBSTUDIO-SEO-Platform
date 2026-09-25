@@ -1,5 +1,24 @@
 # DCWEBSTUDIO SEO Platform Changelog
 
+## 2026-09-25 — R0.3 versioned contracts and acceptance fixtures
+
+- Added 16 strict JSON Schema Draft 2020-12 contracts for identity, imports,
+  artifacts, observations, normalized keywords, stage planning/results,
+  provider cost/SERP evidence, notifications and Telegram operator envelopes.
+- Added checksum-pinned synthetic `.test` fixtures for manual URL input,
+  separate `ru-UA`/`uk-UA` keyword tables, deterministic normalized outputs and
+  an offline SERP response; no live provider or production payload is present.
+- Added 11 offline contract tests covering schema/reference validity, hashes,
+  CSV boundaries, locale/device identity, skipped stages, seven-day diagnostic
+  retention behavior, fail-closed unknown cost and Telegram sanitization.
+- Recorded D-019, passed the R0 exit gate and advanced the active roadmap step
+  to R1.1. No application runtime, package, database, container, provider
+  request or WordPress change was created.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-r03-contracts-20260925-192649`
+
 ## 2026-09-25 — Isolated SEO access through the owner Codex bridge
 
 - Added an explicit SEO profile to the existing private owner-to-Codex Telegram

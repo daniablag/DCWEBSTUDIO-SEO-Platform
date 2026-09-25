@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/identity-record.schema.json",
+  "title": "Project, locale, market and content identities v1",
+  "$defs": {
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project_id", "project_key", "canonical_origin", "default_timezone", "state"],
+      "properties": {
+        "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "project_key": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{2,63}$"},
+        "canonical_origin": {"type": "string", "format": "uri", "pattern": "^https://"},
+        "default_timezone": {"type": "string", "minLength": 1, "maxLength": 80},
+        "state": {"type": "string", "enum": ["planned", "active", "retired"]}
+      }
+    },
+    "locale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locale_id", "project_id", "bcp47_tag", "language_code", "region_code", "is_default", "state"],
+      "properties": {
+        "locale_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "bcp47_tag": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/locale_tag"},
+        "language_code": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/language_code"},
+        "region_code": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/country_code"},
+        "wordpress_locale": {"type": ["string", "null"], "maxLength": 40},
+        "polylang_slug": {"type": ["string", "null"], "pattern": "^[a-z][a-z0-9-]{1,15}$"},
+        "is_default": {"type": "boolean"},
+        "state": {"type": "string", "enum": ["planned", "preparing", "active", "retired"]}
+      }
+    },
+    "market": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["market_id", "project_id", "locale_id", "country_code", "device", "search_engine", "network", "timezone", "currency", "state"],
+      "properties": {
+        "market_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "locale_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "country_code": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/country_code"},
+        "region": {"type": ["string", "null"], "maxLength": 120},
+        "device": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/device"},
+        "search_engine": {"type": "string", "enum": ["google"]},
+        "network": {"type": "string", "enum": ["organic", "search_console", "google_ads", "manual"]},
+        "timezone": {"type": "string", "minLength": 1, "maxLength": 80},
+        "currency": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/currency_code"},
+        "state": {"type": "string", "enum": ["planned", "active", "retired"]}
+      }
+    },
+    "content_unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["content_unit_id", "project_id", "content_kind", "state"],
+      "properties": {
+        "content_unit_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "content_kind": {"type": "string", "enum": ["service", "landing", "article", "category", "other"]},
+        "state": {"type": "string", "enum": ["planned", "active", "retired"]}
+      }
+    },
+    "content_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["content_target_id", "content_unit_id", "project_id", "locale_id", "target_kind", "state"],
+      "properties": {
+        "content_target_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "content_unit_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "project_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "locale_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+        "target_kind": {"type": "string", "enum": ["existing", "proposed"]},
+        "canonical_url": {"type": ["string", "null"], "format": "uri", "pattern": "^https://"},
+        "proposed_path": {"type": ["string", "null"], "pattern": "^/"},
+        "primary_market_id": {"type": ["string", "null"], "format": "uuid"},
+        "state": {"type": "string", "enum": ["planned", "researched", "mapped", "active", "retired"]}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"target_kind": {"const": "existing"}}, "required": ["target_kind"]},
+          "then": {
+            "required": ["canonical_url"],
+            "properties": {
+              "canonical_url": {"type": "string", "format": "uri", "pattern": "^https://"}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"target_kind": {"const": "proposed"}}, "required": ["target_kind"]},
+          "then": {
+            "required": ["proposed_path"],
+            "properties": {
+              "proposed_path": {"type": "string", "pattern": "^/"}
+            }
+          }
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "entity_type", "data"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "entity_type": {"type": "string", "enum": ["project", "locale", "market", "content_unit", "content_target"]},
+    "data": {"type": "object"}
+  },
+  "allOf": [
+    {"if": {"properties": {"entity_type": {"const": "project"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/project"}}}},
+    {"if": {"properties": {"entity_type": {"const": "locale"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/locale"}}}},
+    {"if": {"properties": {"entity_type": {"const": "market"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/market"}}}},
+    {"if": {"properties": {"entity_type": {"const": "content_unit"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/content_unit"}}}},
+    {"if": {"properties": {"entity_type": {"const": "content_target"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/content_target"}}}}
+  ]
+}

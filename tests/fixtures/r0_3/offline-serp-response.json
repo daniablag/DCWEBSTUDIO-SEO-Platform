@@ -1,0 +1,23 @@
+{
+  "request": {
+    "query": "автоматизация бизнес процессов",
+    "country": "UA",
+    "language": "ru",
+    "device": "desktop"
+  },
+  "response_id": "synthetic-serp-001",
+  "results": [
+    {
+      "position": 1,
+      "link": "https://competitor-a.example.test/services/automation",
+      "title": "Автоматизация процессов — пример A",
+      "snippet": "Синтетический результат для проверки адаптера."
+    },
+    {
+      "position": 2,
+      "link": "https://competitor-b.example.test/solutions/crm",
+      "title": "CRM и автоматизация — пример B",
+      "snippet": "Данные не получены от реального поискового сервиса."
+    }
+  ]
+}

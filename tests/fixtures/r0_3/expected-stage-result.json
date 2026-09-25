@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "stage_run_id": "00000000-0000-4000-8000-000000000076",
+  "run_id": "00000000-0000-4000-8000-000000000077",
+  "plan_id": "00000000-0000-4000-8000-000000000072",
+  "stage_name": "collect_serp",
+  "stage_version": "1.0.0",
+  "attempt": 1,
+  "status": "skipped",
+  "started_at": "2026-09-25T12:20:00+03:00",
+  "completed_at": "2026-09-25T12:20:00+03:00",
+  "input_artifacts": [],
+  "output_artifacts": [],
+  "skipped": {
+    "reason_code": "owner_supplied",
+    "explanation": "Offline synthetic SERP artifact supplied for the contract test.",
+    "supplied_artifact_id": "00000000-0000-4000-8000-000000000060"
+  },
+  "approval": {"approval_type": "none", "required": false, "status": "not_required", "actor_role": null, "approval_id": null},
+  "cost": {
+    "schema_version": "1.0.0",
+    "estimate_id": "00000000-0000-4000-8000-000000000074",
+    "stage_name": "collect_serp",
+    "provider": "offline_fixture",
+    "cost_class": "free",
+    "unit": "query",
+    "estimated_units": 0,
+    "pricing_source": null,
+    "currency": null,
+    "upper_bound_minor_units": 0,
+    "budget": {"per_job_remaining_minor_units": null, "daily_remaining_minor_units": null, "monthly_remaining_minor_units": null},
+    "approval_status": "not_required",
+    "enqueue_allowed": true,
+    "blocked_reasons": [],
+    "estimated_at": "2026-09-25T12:18:00+03:00"
+  },
+  "error": null
+}

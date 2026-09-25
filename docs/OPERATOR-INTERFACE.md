@@ -147,11 +147,13 @@ delete, bypass budgets, read secrets or broaden a requested stage boundary.
 Natural-language Telegram messages may be converted into a proposed plan, but
 the plan remains authoritative and all mutations are audited and idempotent.
 
-The existing private WordPress Telegram/Codex bridge is a separate project. The
-SEO bridge does not reuse its service, Codex state, database, secrets or
-lifecycle. Using the same visible bot identity later would require a deliberate
-cross-project routing and permission review; the safe default is a separate
-project-owned bot credential and allowlist.
+The existing private owner-facing multi-project Telegram/Codex bridge is a
+separate administrative project. It can route development sessions to isolated
+site and SEO threads, but it is not the runtime adapter described here. The SEO
+adapter does not reuse its service, Codex state, database, secrets or lifecycle.
+Using the same visible bot identity later would require a deliberate cross-
+project routing and permission review; the safe default is a separate project-
+owned bot credential and allowlist.
 
 ## Future CLI examples
 

@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "00000000-0000-4000-8000-000000000080",
+  "occurred_at": "2026-09-25T12:22:00+03:00",
+  "severity": "error",
+  "code": "STAGE_VALIDATION_FAILED",
+  "summary": "Synthetic keyword row failed validation; no external action was taken.",
+  "correlation": {
+    "correlation_id": "00000000-0000-4000-8000-000000000081",
+    "run_id": "00000000-0000-4000-8000-000000000077",
+    "job_id": "00000000-0000-4000-8000-000000000082",
+    "stage_run_id": "00000000-0000-4000-8000-000000000076"
+  },
+  "deduplication_key": "stage_validation_failed:synthetic:keyword_row",
+  "occurrence_count": 1,
+  "state": "pending",
+  "contains_sensitive_data": false
+}

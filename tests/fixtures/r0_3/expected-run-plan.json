@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0.0",
+  "plan_id": "00000000-0000-4000-8000-000000000072",
+  "project_id": "00000000-0000-4000-8000-000000000001",
+  "requested_by": "owner:primary",
+  "created_at": "2026-09-25T12:18:00+03:00",
+  "expires_at": "2026-09-25T13:18:00+03:00",
+  "input_artifacts": [
+    {
+      "artifact_id": "00000000-0000-4000-8000-000000000040",
+      "artifact_type": "keyword_table",
+      "schema_version": "1.0.0",
+      "content_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+    }
+  ],
+  "start_stage": "validate_keyword_table",
+  "stop_stage": "normalize_keywords",
+  "resolve_missing_upstream": false,
+  "stages": [
+    {
+      "sequence": 1,
+      "stage_name": "validate_keyword_table",
+      "stage_version": "1.0.0",
+      "action": "execute",
+      "input_artifacts": [
+        {
+          "artifact_id": "00000000-0000-4000-8000-000000000040",
+          "artifact_type": "keyword_table",
+          "schema_version": "1.0.0",
+          "content_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      ],
+      "expected_output_types": ["validated_keyword_table"],
+      "side_effects": ["filesystem_artifact_write"],
+      "external_calls": [],
+      "cost": {
+        "schema_version": "1.0.0",
+        "estimate_id": "00000000-0000-4000-8000-000000000073",
+        "stage_name": "validate_keyword_table",
+        "provider": "local_validator",
+        "cost_class": "free",
+        "unit": "keyword_row",
+        "estimated_units": 3,
+        "pricing_source": null,
+        "currency": null,
+        "upper_bound_minor_units": 0,
+        "budget": {"per_job_remaining_minor_units": null, "daily_remaining_minor_units": null, "monthly_remaining_minor_units": null},
+        "approval_status": "not_required",
+        "enqueue_allowed": true,
+        "blocked_reasons": [],
+        "estimated_at": "2026-09-25T12:18:00+03:00"
+      },
+      "approval": {"approval_type": "none", "required": false, "status": "not_required", "actor_role": null, "approval_id": null},
+      "skip": null
+    },
+    {
+      "sequence": 2,
+      "stage_name": "collect_serp",
+      "stage_version": "1.0.0",
+      "action": "skip",
+      "input_artifacts": [],
+      "expected_output_types": [],
+      "side_effects": [],
+      "external_calls": [],
+      "cost": {
+        "schema_version": "1.0.0",
+        "estimate_id": "00000000-0000-4000-8000-000000000074",
+        "stage_name": "collect_serp",
+        "provider": "offline_fixture",
+        "cost_class": "free",
+        "unit": "query",
+        "estimated_units": 0,
+        "pricing_source": null,
+        "currency": null,
+        "upper_bound_minor_units": 0,
+        "budget": {"per_job_remaining_minor_units": null, "daily_remaining_minor_units": null, "monthly_remaining_minor_units": null},
+        "approval_status": "not_required",
+        "enqueue_allowed": true,
+        "blocked_reasons": [],
+        "estimated_at": "2026-09-25T12:18:00+03:00"
+      },
+      "approval": {"approval_type": "none", "required": false, "status": "not_required", "actor_role": null, "approval_id": null},
+      "skip": {
+        "reason_code": "owner_supplied",
+        "explanation": "Offline synthetic SERP artifact supplied for the contract test.",
+        "supplied_artifact_id": "00000000-0000-4000-8000-000000000060"
+      }
+    },
+    {
+      "sequence": 3,
+      "stage_name": "normalize_keywords",
+      "stage_version": "1.0.0",
+      "action": "execute",
+      "input_artifacts": [],
+      "expected_output_types": ["normalized_keyword"],
+      "side_effects": ["filesystem_artifact_write"],
+      "external_calls": [],
+      "cost": {
+        "schema_version": "1.0.0",
+        "estimate_id": "00000000-0000-4000-8000-000000000071",
+        "stage_name": "normalize_keywords",
+        "provider": "local_normalizer",
+        "cost_class": "free",
+        "unit": "keyword_row",
+        "estimated_units": 6,
+        "pricing_source": null,
+        "currency": null,
+        "upper_bound_minor_units": 0,
+        "budget": {"per_job_remaining_minor_units": null, "daily_remaining_minor_units": null, "monthly_remaining_minor_units": null},
+        "approval_status": "not_required",
+        "enqueue_allowed": true,
+        "blocked_reasons": [],
+        "estimated_at": "2026-09-25T12:17:00+03:00"
+      },
+      "approval": {"approval_type": "input_acceptance", "required": true, "status": "approved", "actor_role": "project_owner", "approval_id": "00000000-0000-4000-8000-000000000075"},
+      "skip": null
+    }
+  ],
+  "status": "approved",
+  "plan_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+}

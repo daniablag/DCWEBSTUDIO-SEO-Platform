@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "serp_snapshot_id": "00000000-0000-4000-8000-000000000060",
+  "project_id": "00000000-0000-4000-8000-000000000001",
+  "locale_id": "00000000-0000-4000-8000-000000000010",
+  "market_id": "00000000-0000-4000-8000-000000000020",
+  "query": "автоматизация бизнес процессов",
+  "device": "desktop",
+  "collected_at": "2026-09-25T12:12:00+03:00",
+  "provider": "offline_fixture",
+  "provider_payload_hash": "sha256:15cb99915e615bf4b2628f1ad3a27fcb03ba228a2ccb74370cfda3941e685378",
+  "results": [
+    {
+      "rank": 1,
+      "url": "https://competitor-a.example.test/services/automation",
+      "domain": "competitor-a.example.test",
+      "title": "Автоматизация процессов — пример A",
+      "snippet": "Синтетический результат для проверки адаптера.",
+      "result_type": "organic"
+    },
+    {
+      "rank": 2,
+      "url": "https://competitor-b.example.test/solutions/crm",
+      "domain": "competitor-b.example.test",
+      "title": "CRM и автоматизация — пример B",
+      "snippet": "Данные не получены от реального поискового сервиса.",
+      "result_type": "organic"
+    }
+  ],
+  "source": {
+    "source_type": "provider",
+    "actor_ref": "provider:offline_fixture",
+    "recorded_at": "2026-09-25T12:12:00+03:00",
+    "source_uri": "file:///synthetic/offline-serp-response.json",
+    "provider": "offline_fixture",
+    "original_hash": "sha256:15cb99915e615bf4b2628f1ad3a27fcb03ba228a2ccb74370cfda3941e685378",
+    "parent_artifact_ids": []
+  },
+  "validation": {
+    "valid": true,
+    "validator": "r0_contract_fixture",
+    "validator_version": "1.0.0",
+    "checked_at": "2026-09-25T12:12:01+03:00",
+    "error_count": 0,
+    "warning_count": 0,
+    "issues": []
+  }
+}

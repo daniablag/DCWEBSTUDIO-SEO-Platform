@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/stage-result.schema.json",
+  "title": "Stage execution result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "stage_run_id", "run_id", "plan_id", "stage_name", "stage_version", "attempt", "status", "started_at", "completed_at", "input_artifacts", "output_artifacts", "skipped", "approval", "cost", "error"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "stage_run_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "run_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "plan_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "stage_name": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,80}$"},
+    "stage_version": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$"},
+    "attempt": {"type": "integer", "minimum": 1},
+    "status": {"type": "string", "enum": ["succeeded", "failed", "skipped", "cancelled", "blocked"]},
+    "started_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"},
+    "completed_at": {"type": ["string", "null"], "format": "date-time"},
+    "input_artifacts": {"type": "array", "items": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/artifact_ref"}, "maxItems": 100},
+    "output_artifacts": {"type": "array", "items": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/artifact_ref"}, "maxItems": 100},
+    "skipped": {"oneOf": [{"$ref": "https://schemas.dcwebstudio.com/seo/v1/run-plan.schema.json#/$defs/skipped_stage"}, {"type": "null"}]},
+    "approval": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/run-plan.schema.json#/$defs/approval_requirement"},
+    "cost": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/cost-estimate.schema.json"},
+    "error": {"oneOf": [{"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sanitized_error"}, {"type": "null"}]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "skipped"}}},
+      "then": {"properties": {"skipped": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/run-plan.schema.json#/$defs/skipped_stage"}, "output_artifacts": {"maxItems": 0}, "error": {"type": "null"}}},
+      "else": {"properties": {"skipped": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"status": {"const": "failed"}}},
+      "then": {"properties": {"error": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sanitized_error"}}}
+    },
+    {
+      "if": {"properties": {"status": {"const": "succeeded"}}},
+      "then": {"properties": {"error": {"type": "null"}}}
+    }
+  ]
+}

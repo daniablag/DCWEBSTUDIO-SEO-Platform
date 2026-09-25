@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dcwebstudio.com/seo/v1/notification-delivery.schema.json",
+  "title": "Notification delivery attempt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "delivery_id", "event_id", "channel", "attempt", "state", "attempted_at", "completed_at", "provider_reference_redacted", "error", "next_retry_at"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "delivery_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "event_id": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/uuid"},
+    "channel": {"type": "string", "enum": ["telegram", "log_only"]},
+    "attempt": {"type": "integer", "minimum": 1},
+    "state": {"type": "string", "enum": ["pending", "succeeded", "failed_retryable", "failed_final"]},
+    "attempted_at": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/timestamp"},
+    "completed_at": {"type": ["string", "null"], "format": "date-time"},
+    "provider_reference_redacted": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9._-]{1,120}$"},
+    "error": {"oneOf": [{"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sanitized_error"}, {"type": "null"}]},
+    "next_retry_at": {"type": ["string", "null"], "format": "date-time"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"state": {"const": "succeeded"}}},
+      "then": {"properties": {"error": {"type": "null"}, "next_retry_at": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"state": {"const": "failed_retryable"}}},
+      "then": {"properties": {"error": {"$ref": "https://schemas.dcwebstudio.com/seo/v1/common.schema.json#/$defs/sanitized_error"}, "next_retry_at": {"type": "string", "format": "date-time"}}}
+    }
+  ]
+}
