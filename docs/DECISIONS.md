@@ -105,20 +105,21 @@ This minimizes migration risk for the seven indexed URLs while leaving locale
 and search market as separate decisions. Choosing prefixes for every language
 instead would require an explicit redirect/canonical migration plan.
 
-## D-011 — One private monorepo
+## D-011 — One monorepo with visibility-independent secret controls
 
-Status: accepted direction; remote provider and repository creation pending,
-2026-09-24.
+Status: accepted and implemented, 2026-09-25.
 
-Use one private repository rooted at `/opt/apps/dcwebstudio-seo` for the Python
+Use one repository rooted at `/opt/apps/dcwebstudio-seo` for the Python
 application, CLI, Compose definition, migrations, versioned contracts, tests,
 AI instruction bundles and canonical project documentation. Runtime state,
 secrets, `.env` files, OAuth material, dumps, volumes, logs, provider payloads
 and collected competitor data are excluded from Git.
 
-The repository layout is fixed in `PHASE-0-BASELINE.md`. No repository is
-initialized until the owner selects and provisions the private off-server
-remote.
+The owner selected the public GitHub repository
+`daniablag/DCWEBSTUDIO-SEO-Platform` for the current stage. It may be made
+private later, but neither visibility permits secrets or operational data in
+Git. Server write access uses a dedicated deploy key whose private half is not
+stored in the repository or documentation.
 
 ## D-012 — Stable multilingual identities
 
@@ -132,8 +133,7 @@ taxonomy identifiers are used as cross-system primary keys.
 
 ## D-013 — Canonical docs move into Git through a routed symlink
 
-Status: recommended; execute only after remote approval and a recovery set,
-2026-09-24.
+Status: accepted and completed, 2026-09-25.
 
 After the repository exists, move the complete project documentation package
 to `docs/` in the repository, verify checksums and replace
@@ -141,6 +141,11 @@ to `docs/` in the repository, verify checksums and replace
 `/opt/docs/README.md` route remains unchanged. Keep the former directory in a
 timestamped recovery set until the repository, remote push and documentation
 route have all been verified.
+
+The migration completed through recovery set
+`seo-repository-migration-20260925-133957`; the routed path now resolves to the
+repository copy. Retain the recovery set through at least the next verified
+documentation update and push.
 
 ## D-014 — Project-owned thin core with selective reuse
 

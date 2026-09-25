@@ -1,12 +1,14 @@
 # DCWEBSTUDIO SEO Platform Handoff
 
-Snapshot: 2026-09-25 13:09 Europe/Berlin
+Snapshot: 2026-09-25 13:41 Europe/Berlin
 
 ## Current state
 
-The project is in architecture and planning. `/opt/apps/dcwebstudio-seo` and
-this documentation package exist. No code, database, container, service,
-public route, credentials, scheduled jobs or WordPress plugin exist yet.
+The project is in architecture and planning with source control established.
+`/opt/apps/dcwebstudio-seo` is the Git repository, and its `docs/` directory is
+the canonical documentation package. No application code, database, container,
+service, public route, runtime credentials, scheduled jobs or WordPress plugin
+exist yet.
 
 The production site currently has WordPress-native titles, canonical links,
 virtual robots.txt and a working core sitemap. It does not have managed meta
@@ -25,15 +27,17 @@ currently registers 33 ACF groups and 318 fields including layout fields; none
 has an explicit Polylang `translations` setting. This must be corrected in a
 separately reviewed WordPress release before translations are created.
 
-The application root still contains only `AGENTS.md` and `README.md`. It is not
-a Git repository and no runtime resources exist. The current SEO documents
-match the expected multilingual update relative to recovery set
-`seo-multilingual-context-20260924-212309`; no unexplained parallel edit or
-conflict was found during this review.
+R0.2 completed on 2026-09-25. The public GitHub repository
+`daniablag/DCWEBSTUDIO-SEO-Platform` is connected through a dedicated server
+deploy key, the documentation-only initial commit `f744630` was pushed, and
+the checksum-verified canonical docs now live under repository `docs/`.
+`/opt/docs/dcwebstudio-seo` is a routed symlink to that directory. Repository
+visibility is an owner-approved current-stage choice and does not relax the
+deny-by-default Git rules.
 
-`ROADMAP.md` is the step-by-step execution source of truth. R0.1 is complete;
-the current step is blocked R0.2 (establish private source control). All
-implementation steps remain planned and unstarted.
+`ROADMAP.md` is the step-by-step execution source of truth. R0.1 and R0.2 are
+complete; R0.3 (freeze contracts and acceptance fixtures) is active. All
+runtime implementation steps remain planned and unstarted.
 
 The owner confirmed Ukraine as the first geography and Russian/Ukrainian as the
 first content languages. `MVP-SCOPE.md` records the resulting `ru-UA` and
@@ -93,7 +97,7 @@ Telegram bridge and must not expose shell, SQL, secrets or publication.
   unified per language.
 - Use the current Codex SDK for programmatic local sessions if Codex is selected
   for a worker. Do not base new work on the removed `codex mcp-server` command.
-- Use one private monorepo for application code, CLI, Compose, migrations,
+- Use one monorepo for application code, CLI, Compose, migrations,
   contracts, tests, versioned AI instructions and canonical project docs.
   Runtime data, secrets, provider payloads, logs, dumps and competitor
   collections remain outside Git.
@@ -124,8 +128,10 @@ Telegram bridge and must not expose shell, SQL, secrets or publication.
 - the final monorepo tree and a staged move of canonical docs into Git while
   keeping `/opt/docs/dcwebstudio-seo` as the stable routed entry point.
 
-These are design recommendations, not authorization to activate Polylang,
-initialize Git, create containers, install packages or modify WordPress.
+These remain design recommendations for runtime and WordPress work. Source
+control and the documentation migration are complete; there is still no
+authorization here to activate Polylang, create containers, install packages
+or modify WordPress.
 
 ## Reuse and cost baseline
 
@@ -157,12 +163,9 @@ upgrade triggers.
 
 Follow `ROADMAP.md` one gate at a time. Do not begin R1 while R0 is incomplete.
 
-1. Complete current step R0.2 only after the owner supplies the empty private
-   Git remote and authentication method; then perform the documented docs
-   migration. R0.2 is blocked until then.
-2. Complete R0.3 by freezing version 1 contracts and synthetic acceptance
+1. Complete active R0.3 by freezing version 1 contracts and synthetic acceptance
    fixtures, including notification-event and Telegram-command envelopes.
-3. Begin R1 only after the R0 exit gate passes.
+2. Begin R1 only after the R0 exit gate passes.
 
 The separate WP0 track may be scheduled independently, but it is required only
 before R7 WordPress delivery. Do not activate Polylang or change WordPress as a
@@ -188,3 +191,5 @@ Recovery sets:
   `/opt/docs/config-backups-user/seo-r01-google-device-20260925-130420`.
 - R0.1 completion and Telegram observability baseline:
   `/opt/docs/config-backups-user/seo-telegram-observability-20260925-130952`.
+- R0.2 repository and canonical-doc migration:
+  `/opt/docs/config-backups-user/seo-repository-migration-20260925-133957`.

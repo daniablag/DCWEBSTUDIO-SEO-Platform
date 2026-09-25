@@ -17,12 +17,13 @@ appears, but it must not silently expand the active step.
 - `blocked` — a named external decision or dependency prevents progress;
 - `done` — deliverables and acceptance checks are recorded as passed.
 
-Current step: **R0.2 — establish private source control (`blocked`)**.
+Current step: **R0.3 — freeze contracts and acceptance fixtures (`active`)**.
 
-R0.1 is complete. No implementation step is active while R0.2 waits for the
-owner-provided empty private remote and authentication method.
+R0.1 and R0.2 are complete. The owner approved a public GitHub repository for
+the current stage; repository visibility does not relax the prohibition on
+secrets, credentials, runtime data or collected/provider payloads in Git.
 
-No application code, repository, database, container, credential or WordPress
+No application code, database, container, runtime credential or WordPress
 integration exists yet.
 
 ## Dependency map
@@ -48,8 +49,8 @@ changing production WordPress. Paid providers are not required through R4.
 
 | Milestone | Status | Outcome |
 |---|---|---|
-| R0 — implementation readiness | blocked at R0.2 | exact first scope, private repository and accepted contracts |
-| R1 — foundation | planned | reproducible private application skeleton and isolated PostgreSQL |
+| R0 — implementation readiness | active at R0.3 | exact first scope, versioned repository and accepted contracts |
+| R1 — foundation | planned | reproducible application skeleton and isolated PostgreSQL |
 | R2 — durable kernel | planned | artifacts, runs, stages, jobs, provenance and dry-run planning |
 | R3 — safe collection | planned | bounded URL import, crawl, parse and page-observation artifacts |
 | R4 — research MVP | planned | keyword import, normalization, clustering proposal and URL mapping |
@@ -105,11 +106,11 @@ Acceptance gate: the values are written as an approved MVP scope with no
 ambiguous language, geography, device treatment or implicit paid-provider
 fallback. Device segments must not create separate content targets.
 
-### R0.2 — Establish private source control
+### R0.2 — Establish source control
 
-Status: `blocked`; this is the current step and waits until the owner supplies
-an empty private remote and authentication method without exposing credentials
-in chat or documentation.
+Status: `done`, 2026-09-25. The owner selected the public GitHub repository
+`daniablag/DCWEBSTUDIO-SEO-Platform` for the current stage and authorized that
+visibility. A dedicated write-enabled deploy key is stored only on the server.
 
 Work:
 
@@ -121,12 +122,14 @@ Work:
   checksum-and-symlink procedure;
 - push the documentation-only initial commit and verify the remote copy.
 
-Acceptance gate: one clean private repository, one canonical documentation
-copy, no secret/runtime files tracked and the routed docs still resolve.
+Acceptance gate passed: the clean remote and both commits were verified, the
+canonical documentation is in repository `docs/`, no secret/runtime files are
+tracked and the routed documentation path resolves through the approved
+symlink.
 
 ### R0.3 — Freeze contracts and acceptance fixtures
 
-Status: `planned`.
+Status: `active`.
 
 Define version 1 schemas for:
 
@@ -148,7 +151,7 @@ from schemas and fixtures without choosing a framework-specific representation.
 ### R0 exit gate
 
 - R0.1–R0.3 are `done`;
-- the private remote is verified;
+- the approved remote is verified;
 - first-slice inputs, outputs and stop boundaries are explicit;
 - paid SERP, AI and WordPress are confirmed unnecessary for R1–R4.
 

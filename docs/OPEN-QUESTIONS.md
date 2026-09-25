@@ -74,13 +74,12 @@ one recommendation per language page. See `MVP-SCOPE.md`.
 
 ## Source control
 
-1. Which private remote will back up the single repository: GitHub, GitLab, a
-   private Forgejo/Gitea instance or another reviewed destination? Supply the
-   empty private repository URL and authentication method without putting any
-   credential in documentation or chat.
-2. Approve or reject the recommended canonical-doc move into repository
-   `docs/`, with `/opt/docs/dcwebstudio-seo` retained as a symlink entry point
-   after checksum verification and a recovery set.
+No open source-control decision blocks implementation. The owner selected the
+public GitHub repository `daniablag/DCWEBSTUDIO-SEO-Platform` for the current
+stage, and the checksum-verified canonical-doc move into repository `docs/` is
+complete. Repository visibility may be reconsidered later without changing the
+rule that credentials, runtime state and collected/provider payloads never
+belong in Git.
 
 ## Telegram operations
 

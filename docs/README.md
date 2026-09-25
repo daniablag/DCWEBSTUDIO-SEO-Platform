@@ -5,8 +5,9 @@ planning and controlled content-generation platform for `dcwebstudio.com`.
 
 ## Status
 
-Planning only. The project root and documentation exist, but there is no
-runtime, Compose stack, database, WordPress plugin, credential set or scheduler.
+Planning and source-control foundation only. Canonical documentation is tracked
+in the project repository, but there is no runtime, Compose stack, database,
+WordPress plugin, runtime credential set or scheduler.
 
 ## Read order
 
@@ -32,8 +33,9 @@ runtime, Compose stack, database, WordPress plugin, credential set or scheduler.
 
 ## Project boundaries
 
-- Planned application root: `/opt/apps/dcwebstudio-seo`
-- Documentation root: `/opt/docs/dcwebstudio-seo`
+- Application/repository root: `/opt/apps/dcwebstudio-seo`
+- Stable documentation route: `/opt/docs/dcwebstudio-seo`
+- Canonical documentation directory: `/opt/apps/dcwebstudio-seo/docs`
 - Production WordPress: `/var/www/dcwebstudio.com/public_html`
 - Future WordPress adapter: project-owned plugin, reviewed under the WordPress
   workflow before it is added or activated.

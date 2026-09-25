@@ -1,5 +1,27 @@
 # DCWEBSTUDIO SEO Platform Changelog
 
+## 2026-09-25 — R0.2 repository and canonical documentation migration
+
+- Initialized the monorepo at `/opt/apps/dcwebstudio-seo` and connected the
+  owner-approved public GitHub repository
+  `daniablag/DCWEBSTUDIO-SEO-Platform` through a dedicated deploy key.
+- Added deny-by-default `.gitignore` rules for secrets, credentials, databases,
+  runtime state, logs, provider payloads, raw HTML and collected competitor
+  data; a credential-shape scan passed before staging.
+- Added `THIRD_PARTY.md`; no third-party source code has been imported.
+- Pushed documentation-only initial commit `f744630` and verified the remote.
+- Compared per-file checksums, found no parallel documentation change, moved
+  the former docs directory intact into the recovery set and routed
+  `/opt/docs/dcwebstudio-seo` to repository `docs/` by symlink.
+- Recorded public visibility as the owner's current-stage choice; secret and
+  operational-data exclusions remain mandatory regardless of visibility.
+- Completed R0.2 and advanced the roadmap to active R0.3. No application code,
+  database, container, package, provider request or WordPress change was made.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-repository-migration-20260925-133957`
+
 ## 2026-09-25 — R0.1 completion and Telegram operations baseline
 
 - Completed R0.1 after the owner confirmed the initial approval role and a

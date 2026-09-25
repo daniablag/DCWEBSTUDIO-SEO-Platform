@@ -3,10 +3,11 @@
 ## Purpose and status
 
 This document converts the multilingual, persistence and source-control work
-into an implementable owner decision packet. It is a design baseline, not
-deployment approval. Polylang activation, WordPress code/content changes, Git
-initialization, remote creation, containers and package installation remain
-outside the authorized work.
+into an implementable owner decision packet. It remains a design baseline for
+runtime and WordPress work. Source control and the canonical documentation
+migration were separately authorized and completed on 2026-09-25; Polylang
+activation, WordPress code/content changes, containers and package installation
+remain outside the authorized work.
 
 Verified on 2026-09-24:
 
@@ -37,8 +38,8 @@ The owner should approve one row per item before the dependent release begins.
 | Media | media translation off initially; ACF images Copy Once | approve or request translated attachments | WordPress release |
 | ACF policy | matrix below | approve exceptions | WordPress release |
 | Forms and menus | separate per public locale | confirm ownership and approver | Polylang |
-| Private Git remote | one off-server private repository | provider, empty repo URL, auth method | first code |
-| Docs migration | repository `docs/` plus routed symlink | approve | docs move |
+| Git remote | public GitHub repository for the current stage; secret controls do not depend on visibility | confirmed and completed | first code |
+| Docs migration | repository `docs/` plus routed symlink | confirmed and completed | docs move |
 | Approval roles | project owner initially approves imports and keyword/page maps | name later delegates for briefs, drafts, delivery, publication | governed workflow |
 | Telegram operations | logs/outbox first; project-owned notifier and command adapter later | bot/destination supplied only when R8 begins | operations |
 | Reuse policy | project-owned thin core plus bounded reviewed MIT components | approve or name an exception | source intake |
@@ -234,9 +235,10 @@ The platform validates it against known targets, hashes it and stores a new
 observation only when membership changes. It never queries WordPress MariaDB or
 reads Polylang's internal taxonomy tables.
 
-## Final private repository layout
+## Final repository layout
 
-The project uses one private Python monorepo:
+The project uses one Python monorepo. It is public for the current stage by
+owner decision, while operational data and secrets remain excluded:
 
 ```text
 /opt/apps/dcwebstudio-seo/
@@ -244,6 +246,7 @@ The project uses one private Python monorepo:
   .env.example
   AGENTS.md
   README.md
+  THIRD_PARTY.md
   pyproject.toml
   uv.lock
   compose.yaml
@@ -311,13 +314,14 @@ classes. Secret examples contain names and placeholders only.
 
 ## Canonical documentation migration
 
-Perform this only after the owner provisions the empty private remote:
+This procedure was completed on 2026-09-25 after the owner provisioned and
+approved the empty remote:
 
 1. Create a recovery set of `/opt/apps/dcwebstudio-seo` and
    `/opt/docs/dcwebstudio-seo`.
 2. Initialize the repository at `/opt/apps/dcwebstudio-seo`, add the approved
-   ignore rules first and configure the private remote without storing a token
-   in repository configuration or documentation.
+   ignore rules first and configure the remote without storing a token in
+   repository configuration or documentation.
 3. Copy the complete documentation package into repository `docs/`, preserving
    ownership and modes. Commit and push the initial documentation-only state.
 4. Compare per-file checksums between the repository copy and the routed docs.
@@ -334,3 +338,6 @@ Perform this only after the owner provisions the empty private remote:
 This preserves the global documentation router while making Git the only
 canonical editable copy. Shared server documents remain outside this repository
 unless a later cross-project infrastructure change explicitly requires them.
+
+Execution record: initial documentation commit `f744630`; recovery set
+`/opt/docs/config-backups-user/seo-repository-migration-20260925-133957`.
