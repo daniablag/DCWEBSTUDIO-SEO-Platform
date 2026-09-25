@@ -1,5 +1,29 @@
 # DCWEBSTUDIO SEO Platform Changelog
 
+## 2026-09-25 — R1.1 repository skeleton
+
+- Added the accepted importable `src/dcwebstudio_seo/` package boundaries plus
+  migration, versioned instruction, integration-test, health-check and backup
+  placeholders without creating runtime behavior or a service.
+- Added Python 3.12 package metadata, enforced uv 0.12.19, generated a fully
+  resolved `uv.lock`, and pinned Hatchling 1.32.4, jsonschema 4.26.0, pytest
+  9.1.1, Ruff 0.16.9 and mypy 2.3.1.
+- Added conservative proprietary `LICENSE` and `NOTICE` files. No third-party
+  source was copied or adapted, so the `THIRD_PARTY.md` register remains empty.
+- Replaced deprecated `jsonschema.RefResolver` usage in the contract acceptance
+  test with `referencing.Registry`; all schemas and fixture content remain
+  unchanged.
+- Passed frozen-lock validation, formatting, lint, strict source type checking,
+  14 tests plus 14 subtests, wheel build/content inspection and Git exclusion
+  checks. No database, container, listener, credential, provider request or
+  WordPress change was created.
+- Completed R1.1 and advanced the active roadmap step to R1.2 only after its
+  acceptance checks passed.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-r11-skeleton-20260925-204942`
+
 ## 2026-09-25 — R0.3 versioned contracts and acceptance fixtures
 
 - Added 16 strict JSON Schema Draft 2020-12 contracts for identity, imports,

@@ -7,14 +7,13 @@ import copy
 import csv
 import hashlib
 import json
-import sys
 import unicodedata
 import unittest
 from pathlib import Path
 from urllib.parse import urlparse
 
-from jsonschema import Draft202012Validator, FormatChecker, RefResolver
-
+from jsonschema import Draft202012Validator, FormatChecker
+from referencing import Registry, Resource
 
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA_ROOT = ROOT / "contracts"
@@ -51,7 +50,9 @@ class ContractTest(unittest.TestCase):
     def setUpClass(cls):
         cls.schema_paths = sorted(SCHEMA_ROOT.rglob("*.schema.json"))
         cls.schemas = [load_json(path) for path in cls.schema_paths]
-        cls.schema_store = {schema["$id"]: schema for schema in cls.schemas}
+        cls.registry = Registry().with_resources(
+            (schema["$id"], Resource.from_contents(schema)) for schema in cls.schemas
+        )
 
     def validator(self, schema_file: str) -> Draft202012Validator:
         matches = [
@@ -61,11 +62,16 @@ class ContractTest(unittest.TestCase):
         ]
         self.assertEqual(len(matches), 1, f"expected one schema named {schema_file}")
         schema = matches[0]
-        resolver = RefResolver.from_schema(schema, store=self.schema_store)
-        return Draft202012Validator(schema, resolver=resolver, format_checker=FormatChecker())
+        return Draft202012Validator(
+            schema,
+            registry=self.registry,
+            format_checker=FormatChecker(),
+        )
 
     def assert_valid(self, schema_file: str, instance) -> None:
-        errors = sorted(self.validator(schema_file).iter_errors(instance), key=lambda error: list(error.path))
+        errors = sorted(
+            self.validator(schema_file).iter_errors(instance), key=lambda error: list(error.path)
+        )
         detail = "\n".join(f"{list(error.path)}: {error.message}" for error in errors)
         self.assertFalse(errors, detail)
 
@@ -108,10 +114,16 @@ class ContractTest(unittest.TestCase):
             self.assert_valid("normalized-keyword.schema.json", record)
 
     def test_manual_url_input_matches_normalized_batch(self):
-        lines = [line for line in (FIXTURE_ROOT / "url-list.txt").read_text(encoding="utf-8").splitlines() if line]
+        lines = [
+            line
+            for line in (FIXTURE_ROOT / "url-list.txt").read_text(encoding="utf-8").splitlines()
+            if line
+        ]
         batch = load_json(FIXTURE_ROOT / "expected-url-batch.json")
         self.assertEqual(lines, [row["url"] for row in batch["rows"]])
-        self.assertEqual(batch["source"]["original_hash"], sha256_file(FIXTURE_ROOT / "url-list.txt"))
+        self.assertEqual(
+            batch["source"]["original_hash"], sha256_file(FIXTURE_ROOT / "url-list.txt")
+        )
         for value in lines:
             self.assertTrue(urlparse(value).hostname.endswith(".example.test"))
 
@@ -134,8 +146,12 @@ class ContractTest(unittest.TestCase):
                     for row in expected["rows"]
                 ],
             )
-            self.assertTrue(all(not row["phrase"].lstrip().startswith(("=", "+", "-", "@")) for row in rows))
-            self.assertTrue(all(urlparse(row["target_url"]).hostname.endswith(".example.test") for row in rows))
+            self.assertTrue(
+                all(not row["phrase"].lstrip().startswith(("=", "+", "-", "@")) for row in rows)
+            )
+            self.assertTrue(
+                all(urlparse(row["target_url"]).hostname.endswith(".example.test") for row in rows)
+            )
 
         self.assertEqual({row["locale_tag"] for row in expected_tables["ru"]["rows"]}, {"ru-UA"})
         self.assertEqual({row["locale_tag"] for row in expected_tables["uk"]["rows"]}, {"uk-UA"})
@@ -180,14 +196,23 @@ class ContractTest(unittest.TestCase):
         records = load_json(FIXTURE_ROOT / "identity-records.json")
         locales = [record["data"] for record in records if record["entity_type"] == "locale"]
         markets = [record["data"] for record in records if record["entity_type"] == "market"]
-        targets = [record["data"] for record in records if record["entity_type"] == "content_target"]
+        targets = [
+            record["data"] for record in records if record["entity_type"] == "content_target"
+        ]
         self.assertEqual({locale["bcp47_tag"] for locale in locales}, {"ru-UA", "uk-UA"})
         self.assertEqual({market["device"] for market in markets}, {"desktop", "mobile"})
         self.assertEqual(len(markets), 4)
         self.assertEqual(len(targets), 2)
-        self.assertEqual({target["locale_id"] for target in targets}, {locale["locale_id"] for locale in locales})
+        self.assertEqual(
+            {target["locale_id"] for target in targets}, {locale["locale_id"] for locale in locales}
+        )
 
-        existing = next(record for record in records if record["entity_type"] == "content_target" and record["data"]["target_kind"] == "existing")
+        existing = next(
+            record
+            for record in records
+            if record["entity_type"] == "content_target"
+            and record["data"]["target_kind"] == "existing"
+        )
         invalid = copy.deepcopy(existing)
         invalid["data"]["canonical_url"] = None
         self.assert_invalid("identity-record.schema.json", invalid)

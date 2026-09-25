@@ -1,8 +1,9 @@
 # DCWEBSTUDIO SEO Platform
 
-Status: implementation readiness complete; R1 repository foundation is active.
-Versioned contracts and synthetic acceptance fixtures exist, but no application,
-database, container, scheduled job or WordPress integration has been deployed.
+Status: R1.1 repository skeleton complete; R1.2 configuration and logging
+boundary is active. Versioned contracts, synthetic acceptance fixtures and the
+minimal Python package layout exist, but no database, container, listener,
+scheduled job or WordPress integration has been deployed.
 
 Current source/runtime root:
 
@@ -18,8 +19,18 @@ The repository is public for the current stage by owner decision. Secrets,
 runtime state, provider payloads and collected page data must never be committed.
 
 The frozen v1 boundary schemas are under `contracts/`. Their synthetic R0.3
-fixtures and offline acceptance checks are under `tests/`; run
-`python3 tests/contract/test_contracts.py -v`.
+fixtures and offline acceptance checks are under `tests/`.
+
+The development baseline is Python 3.12 and uv 0.12.19. All direct and
+transitive packages are frozen in `uv.lock`:
+
+```bash
+uv sync --frozen
+uv run --frozen ruff format --check src tests
+uv run --frozen ruff check .
+uv run --frozen mypy
+uv run --frozen pytest
+```
 
 The intended product is a private SEO research and controlled content pipeline
 for `dcwebstudio.com`. It will collect permitted search/competitor observations,

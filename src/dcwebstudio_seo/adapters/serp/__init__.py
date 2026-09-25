@@ -1,0 +1,1 @@
+"""SERP provider adapter boundary."""

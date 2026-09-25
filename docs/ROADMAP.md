@@ -17,14 +17,15 @@ appears, but it must not silently expand the active step.
 - `blocked` — a named external decision or dependency prevents progress;
 - `done` — deliverables and acceptance checks are recorded as passed.
 
-Current step: **R1.1 — repository skeleton (`active`)**.
+Current step: **R1.2 — configuration and logging boundary (`active`)**.
 
 R0.1–R0.3 are complete. The owner approved a public GitHub repository for
 the current stage; repository visibility does not relax the prohibition on
 secrets, credentials, runtime data or collected/provider payloads in Git.
 
-No application code, database, container, runtime credential or WordPress
-integration exists yet.
+A minimal importable Python package skeleton now exists, but no application
+behavior, database, container, runtime credential or WordPress integration
+exists yet.
 
 ## Dependency map
 
@@ -50,7 +51,7 @@ changing production WordPress. Paid providers are not required through R4.
 | Milestone | Status | Outcome |
 |---|---|---|
 | R0 — implementation readiness | done | exact first scope, versioned repository and accepted contracts |
-| R1 — foundation | active at R1.1 | reproducible application skeleton and isolated PostgreSQL |
+| R1 — foundation | active at R1.2 | reproducible application skeleton and isolated PostgreSQL |
 | R2 — durable kernel | planned | artifacts, runs, stages, jobs, provenance and dry-run planning |
 | R3 — safe collection | planned | bounded URL import, crawl, parse and page-observation artifacts |
 | R4 — research MVP | planned | keyword import, normalization, clustering proposal and URL mapping |
@@ -167,10 +168,13 @@ features.
 
 ### Ordered steps
 
-1. **R1.1 Repository skeleton** — create the accepted `src/`, migrations,
-   contracts, tests, instructions and deploy layout; add pinned Python tooling
-   and license/notice files.
-2. **R1.2 Configuration and logging boundary** — typed settings,
+1. **R1.1 Repository skeleton** — `done`, 2026-09-25. Created the accepted
+   `src/`, migrations, contracts, tests, instructions and deploy layout; added
+   the Python 3.12 package metadata, uv 0.12.19 requirement, fully resolved
+   `uv.lock`, pinned build/test/lint/type tooling and conservative proprietary
+   license/notice files. The package, lint, type, contract, unit and wheel
+   checks passed without adding runtime behavior or services.
+2. **R1.2 Configuration and logging boundary** — `active`. Typed settings,
    `.env.example` placeholders, structured redacted logs, correlation IDs, log
    rotation and startup validation; no real credential.
 3. **R1.3 Isolated PostgreSQL** — one private Compose database, migration tool,

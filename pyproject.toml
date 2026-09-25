@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dcwebstudio-seo"
+version = "0.1.0"
+description = "Private SEO research and controlled content workflow platform"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "LicenseRef-DCWEBSTUDIO-Proprietary"
+license-files = ["LICENSE", "NOTICE"]
+authors = [
+  { name = "DCWEBSTUDIO" },
+]
+dependencies = [
+  "jsonschema[format-nongpl]==4.26.0",
+]
+
+[dependency-groups]
+dev = [
+  "mypy==2.3.1",
+  "pytest==9.1.1",
+  "ruff==0.16.9",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dcwebstudio_seo"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src"]
+
+[tool.uv]
+required-version = "==0.12.19"
+default-groups = ["dev"]

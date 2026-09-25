@@ -44,5 +44,5 @@ queue or storage representation.
 | Audited operator outcome | `operator/v1/telegram-outcome.schema.json` |
 
 `tests/fixtures/r0_3/` contains synthetic acceptance data. Run
-`python3 tests/contract/test_contracts.py -v` to validate schema syntax,
-references, examples, CSV boundaries and the fixture checksum manifest.
+`uv run --frozen python tests/contract/test_contracts.py -v` to validate schema
+syntax, references, examples, CSV boundaries and the fixture checksum manifest.
