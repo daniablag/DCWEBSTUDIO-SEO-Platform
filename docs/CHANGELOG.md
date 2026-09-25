@@ -1,0 +1,169 @@
+# DCWEBSTUDIO SEO Platform Changelog
+
+## 2026-09-25 — R0.1 completion and Telegram operations baseline
+
+- Completed R0.1 after the owner confirmed the initial approval role and a
+  seven-day maximum for bounded diagnostic raw HTML; successful crawls retain
+  normalized observations and hashes rather than raw HTML.
+- Moved the current roadmap step to blocked R0.2, pending the empty private Git
+  remote and authentication method.
+- Required structured redacted logs with correlation IDs plus a durable
+  PostgreSQL notification outbox as the authoritative error path.
+- Added a later Telegram notifier for deduplicated actionable final errors and
+  a project-owned command bridge over the same reviewed CLI/API service layer.
+- Defined read-only-first commands and expiring `plan -> confirm` authorization
+  for later mutations; prohibited shell, SQL, secret access and publication.
+- Kept the SEO bridge separate from the existing WordPress Telegram bridge's
+  service, secrets, database, Codex state and lifecycle.
+- No bot, token, service, public listener, repository, code, database,
+  container, package or WordPress change was created.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-telegram-observability-20260925-130952`
+
+## 2026-09-25 — Ukraine bilingual MVP scope
+
+- Recorded Ukraine as the first search geography and Russian/Ukrainian as the
+  first content languages, with initial research identities `ru-UA` and
+  `uk-UA`.
+- Defined one language-neutral content unit with separate Russian and Ukrainian
+  content targets linked later through an observed Polylang translation set.
+- Required independent real-query research, clusters, metadata, briefs and
+  measurements per language instead of mechanical keyword translation.
+- Clarified that desktop/mobile are observation segments, not page variants or
+  additional business geographies; each language receives one combined page
+  recommendation unless evidence shows a material device difference.
+- Recorded the owner's confirmation of Google as the first engine and of the
+  combined page recommendation with preserved desktop/mobile evidence.
+- Added `MVP-SCOPE.md`, marked R0.1 partially resolved and reduced its remaining
+  confirmations to the initial approver and diagnostic raw-payload retention.
+- No Polylang activation, page copy, WordPress change, provider request,
+  repository, code, database, package or container was created.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-ukraine-bilingual-scope-20260925-125551`
+
+## 2026-09-25 — Gated execution roadmap
+
+- Replaced the broad phase list with numbered R0–R8 execution milestones and a
+  separate WP0 WordPress-readiness track.
+- Made R0.1 (freeze the first research scope) the only active step; no
+  implementation or production step has started.
+- Added per-step deliverables, ordered work and acceptance gates for repository
+  setup, durable workflow kernel, safe crawl, keyword intelligence, optional
+  providers, governed content, WordPress draft delivery and operations.
+- Defined the research MVP at R4, content MVP at R6 and delivery MVP at R7.
+- Kept the R1–R4 path independent of paid APIs/AI and kept WordPress/Polylang
+  work from blocking the research platform through R6.
+- Preserved deferred heavy services and required measured evidence plus a new
+  architecture decision before adding them.
+- No repository, source code, package, database, container, credential,
+  provider request or WordPress change was created.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-execution-roadmap-20260925-121100`
+
+## 2026-09-24 — Thin-core, reuse and provider-cost baseline
+
+- Accepted a project-owned thin core for contracts, provenance, run planning,
+  durable jobs, approvals, multilingual identities and WordPress projection.
+- Recorded the reviewed open-source donor matrix: bounded CrawlSEO/OpenGSC
+  reuse, SEOctopus/SEO Command Center as references and no StackSEO code reuse
+  without a usable license.
+- Added a source-intake contract requiring immutable commit provenance,
+  smallest-component imports, adapter isolation, tests and license notices.
+- Required an MVP path that works from owner URL lists and keyword tables with
+  no paid SERP provider and no AI runtime.
+- Classified paid providers as disabled by default and required price-version,
+  per-job, daily and monthly caps before enqueueing any paid request.
+- Reaffirmed the single Python package/image, PostgreSQL-only stateful MVP and
+  exclusions for Redis, public UI, permanent browser pools, local models,
+  search clusters and vector storage until measurements justify them.
+- Aligned the application-root README with the canonical monorepo layout and
+  removed its obsolete preliminary directory list.
+- No source import, repository initialization, provider signup, credential,
+  package, container, runtime or WordPress change was performed.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-reuse-cost-baseline-20260924-233615`
+
+## 2026-09-24 — Phase 0 multilingual and repository baseline
+
+- Reverified production without mutation: theme 0.1.79 active, Polylang Pro
+  3.7.8 inactive, WordPress locale `ru_RU`, seven published pages and no
+  Polylang language taxonomy.
+- Confirmed the application and docs are not Git repositories and found no
+  unexplained parallel documentation changes.
+- Added a bounded owner decision packet, recommended default-language URL
+  contract and backed-up canary-first Polylang migration sequence.
+- Inventoried 33 ACF groups and 318 fields and defined deterministic Translate,
+  Copy Once and Synchronize rules plus URL, company-options and CF7 exceptions.
+- Expanded the persistence design for locale, market, content unit, locale
+  target, WordPress object and adapter-observed translation sets.
+- Fixed the recommended one-private-monorepo tree and a staged plan to move
+  canonical docs into Git while keeping `/opt/docs/dcwebstudio-seo` as the
+  routed entry point.
+- No plugin activation, theme/content change, repository initialization,
+  container, package installation or public-routing change was performed.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-phase0-design-20260924-231121`
+
+## 2026-09-24 — Multilingual prerequisite and source-control handoff
+
+- Recorded that Polylang Pro 3.7.8 is installed but inactive and unconfigured;
+  no production activation was performed.
+- Made the multilingual WordPress contract a prerequisite for the SEO adapter
+  and automated content delivery.
+- Separated locale/language from country or regional search market in the
+  architecture and added locale-specific content targets linked by a conceptual
+  content unit and Polylang translation relationship.
+- Added the URL-policy, ACF translation behavior and controlled Polylang
+  migration decisions to phase 0 and the handoff.
+- Added the Git repository/remote layout as a decision required before the
+  first application code is created.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-multilingual-context-20260924-212309`
+
+## 2026-09-24 — Composable stages and manual entry points
+
+- Replaced the implied mandatory linear pipeline with a directed graph of
+  independently invocable stages.
+- Made owner-supplied URL lists, keyword tables, clusters, briefs and drafts
+  first-class versioned artifacts with validation and provenance.
+- Added a run-planning contract that records start/stop boundaries, executed
+  stages, skipped upstream stages, side effects and approvals.
+- Required Codex/AI operators to use reviewed CLI/API commands rather than
+  direct database access, and to avoid launching upstream work implicitly.
+- Added acceptance requirements for URL-list and keyword-table entry paths.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-manual-entrypoints-20260924-195734`
+
+## 2026-09-24 — Project documentation foundation
+
+- Registered the planned SEO platform as an independent shared-VPS project.
+- Created `/opt/apps/dcwebstudio-seo` and the documentation package under
+  `/opt/docs/dcwebstudio-seo`.
+- Defined separate Compose/PostgreSQL/secret boundaries and prohibited reuse of
+  WordPress MariaDB or another project's runtime resources.
+- Defined provider-based SERP acquisition, polite competitor fetching, Google
+  Ads/Search Console adapters, provenance-first data modeling, governed AI
+  drafting and draft-only WordPress delivery.
+- Recorded the current VPS capacity snapshot and a constrained MVP resource
+  envelope. No container, database, service, credential or WordPress change was
+  made.
+- Recorded current OpenAI guidance: new programmatic Codex automation should
+  use the Codex SDK/app-server path rather than the removed MCP-server command.
+
+Recovery set for modified shared routing documents:
+
+`/opt/docs/config-backups-user/seo-platform-foundation-20260924-194500`

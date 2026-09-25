@@ -1,0 +1,56 @@
+# Local configuration and secrets
+.env*
+!.env.example
+secrets/
+credentials/
+oauth/
+tokens/
+*.pem
+*.key
+*.p12
+*.pfx
+*_rsa
+*_ed25519
+
+# Databases, persistent volumes and backups
+*.sql
+*.dump
+*.backup
+*.sqlite*
+*.db
+volumes/
+db-data/
+.data/
+
+# Runtime and provider data
+runtime/
+workspaces/
+logs/
+*.log
+cache/
+.cache/
+provider-payloads/
+raw-provider/
+raw-html/
+crawl-data/
+competitor-collections/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# JavaScript and editor/OS files
+node_modules/
+.DS_Store
+.idea/
+.vscode/
