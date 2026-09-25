@@ -119,6 +119,14 @@ the vertical slice.
 - Do not add `daniablag` to the Docker group; use the server's narrow sudo
   pattern for reviewed Docker operations.
 
+R1.2 fixes the rotation ownership boundary. The default `stderr`/`stdout` JSONL
+sink is rotated and retained by the future Compose/runtime configuration; the
+application does not duplicate that rotation. An explicitly selected file sink
+uses `RotatingFileHandler` with validated `log_max_bytes` and
+`log_backup_count`, requires an existing writable absolute parent directory and
+never creates that directory during validation. Defaults are 10 MiB and five
+backups; accepted bounds are 64 KiB–100 MiB and one–ten backups.
+
 ## Backup requirement
 
 Before live data matters, define automated `pg_dump`, retention, restore test

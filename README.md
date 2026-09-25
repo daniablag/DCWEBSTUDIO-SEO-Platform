@@ -1,9 +1,9 @@
 # DCWEBSTUDIO SEO Platform
 
-Status: R1.1 repository skeleton complete; R1.2 configuration and logging
-boundary is active. Versioned contracts, synthetic acceptance fixtures and the
-minimal Python package layout exist, but no database, container, listener,
-scheduled job or WordPress integration has been deployed.
+Status: R1.1–R1.2 complete; R1.3 isolated PostgreSQL is active. Versioned
+contracts, synthetic acceptance fixtures, the minimal Python package, typed
+configuration and structured logging exist, but no database, container,
+listener, scheduled job or WordPress integration has been deployed.
 
 Current source/runtime root:
 
@@ -31,6 +31,17 @@ uv run --frozen ruff check .
 uv run --frozen mypy
 uv run --frozen pytest
 ```
+
+R1.2 settings use the `DCWS_SEO_` prefix. The tracked `.env.example` contains
+only non-secret defaults; unknown project-prefixed variables, invalid values,
+production `DEBUG` logging and unsafe file-log paths fail startup validation.
+Credentials are not settings fields and must later be provided through
+separately reviewed read-only secret files.
+
+Logs are bounded JSONL records with canonical UUID correlation IDs and
+recursive credential redaction. `stderr` is the default sink. A configured file
+sink uses bounded size/count rotation; stream-log rotation remains the runtime
+owner's responsibility when Compose is introduced.
 
 The intended product is a private SEO research and controlled content pipeline
 for `dcwebstudio.com`. It will collect permitted search/competitor observations,

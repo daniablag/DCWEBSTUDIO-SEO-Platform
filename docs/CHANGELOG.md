@@ -1,5 +1,27 @@
 # DCWEBSTUDIO SEO Platform Changelog
 
+## 2026-09-25 — R1.2 configuration and logging boundary
+
+- Added a strict Pydantic Settings 2.15.0 model for non-secret `DCWS_SEO_`
+  configuration and a tracked `.env.example` containing only safe defaults.
+- Added fail-closed startup validation for unknown/invalid settings, production
+  `DEBUG`, log destination/path conflicts and file-log directory requirements;
+  error summaries omit rejected values.
+- Added canonical UUID correlation contexts and bounded JSONL logging with
+  stable event names, recursive structured-field sanitization and free-text
+  redaction for common credential forms.
+- Added tested file size/count rotation and documented that the future runtime
+  owns rotation for the default `stderr`/`stdout` sink.
+- Passed lock validation, format/lint, strict source type checking, 31 tests
+  plus 14 subtests and the fresh-checkout package build. No credential,
+  database, container, listener, provider call or WordPress change was made.
+- Completed R1.2 and advanced the active roadmap step to R1.3 only after the
+  acceptance checks passed.
+
+Recovery set:
+
+`/opt/docs/config-backups-user/seo-r12-config-logging-20260925-210217`
+
 ## 2026-09-25 — R1.1 repository skeleton
 
 - Added the accepted importable `src/dcwebstudio_seo/` package boundaries plus

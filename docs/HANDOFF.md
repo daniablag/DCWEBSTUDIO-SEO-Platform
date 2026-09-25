@@ -1,15 +1,16 @@
 # DCWEBSTUDIO SEO Platform Handoff
 
-Snapshot: 2026-09-25 20:52 Europe/Berlin
+Snapshot: 2026-09-25 21:06 Europe/Berlin
 
 ## Current state
 
-The project has completed implementation readiness and R1.1 of the runtime
+The project has completed implementation readiness and R1.1–R1.2 of the runtime
 foundation with source control established.
 `/opt/apps/dcwebstudio-seo` is the Git repository, and its `docs/` directory is
-the canonical documentation package. A minimal importable Python package
-skeleton exists, but no application behavior, database, container, service,
-public route, runtime credentials, scheduled jobs or WordPress plugin exists.
+the canonical documentation package. A minimal importable Python package,
+typed settings, startup validation and structured logging exist, but no
+database, container, service, public route, runtime credentials, scheduled jobs
+or WordPress plugin exists.
 
 Project documentation is now strictly routed. Normal SEO sessions start with
 the repository `AGENTS.md`, this package's `README.md` and this handoff, then
@@ -42,8 +43,8 @@ the checksum-verified canonical docs now live under repository `docs/`.
 visibility is an owner-approved current-stage choice and does not relax the
 deny-by-default Git rules.
 
-`ROADMAP.md` is the step-by-step execution source of truth. R0.1–R0.3 and R1.1
-are complete. R1.2 (configuration and logging boundary) is active; no runtime,
+`ROADMAP.md` is the step-by-step execution source of truth. R0.1–R0.3 and
+R1.1–R1.2 are complete. R1.3 (isolated PostgreSQL) is active; no runtime,
 database, container or service has been created.
 
 R1.1 added the accepted `src/dcwebstudio_seo/` boundaries, migration,
@@ -58,6 +59,19 @@ Run `uv sync --frozen`, then `uv run --frozen ruff format --check src tests`,
 `uv run --frozen ruff check .`, `uv run --frozen mypy` and
 `uv run --frozen pytest`. At handoff the lock check, lint, type check, 14 tests
 plus 14 subtests, wheel build and wheel-content check all passed.
+
+R1.2 added Pydantic Settings 2.15.0 and a strict `DCWS_SEO_` configuration
+model. `.env.example` contains only non-secret settings; unknown prefixed
+variables, invalid values, production `DEBUG`, unsafe log destination/path
+combinations and missing file-log parents fail with sanitized errors. Real
+credentials are deliberately absent from the settings model.
+
+The logging boundary emits bounded JSONL with canonical UUID correlation IDs,
+stable event names and recursively sanitized structured fields. It redacts
+sensitive keys plus common bearer, assignment, URL-userinfo and private-key
+forms. The default stream sink leaves rotation to the future runtime; an
+explicit file sink uses validated size/count rotation and does not create its
+parent directory. Ruff, strict mypy and 31 tests plus 14 subtests pass.
 
 R0.3 added 16 transport-neutral JSON Schema Draft 2020-12 contracts under
 `contracts/` and checksum-pinned synthetic acceptance data under
@@ -195,10 +209,10 @@ upgrade triggers.
 
 Follow `ROADMAP.md` one gate at a time.
 
-1. Complete active R1.2: add typed settings, placeholder-only `.env.example`,
-   startup validation, structured redacted logs, correlation IDs and the
-   documented rotation boundary without adding a real credential or listener.
-2. Do not begin R1.3 PostgreSQL/Compose work until the R1.2 acceptance checks
+1. Complete active R1.3: add one private Compose PostgreSQL database,
+   project-owned volume, migration tool, health check and explicit resource
+   limits with no published database port.
+2. Do not begin R1.4 application commands until the R1.3 acceptance checks
    and documentation update pass.
 
 The separate WP0 track may be scheduled independently, but it is required only
@@ -231,3 +245,5 @@ Recovery sets:
   `/opt/docs/config-backups-user/seo-r03-contracts-20260925-192649`.
 - R1.1 repository skeleton, pre-change repository bundle and tree archive:
   `/opt/docs/config-backups-user/seo-r11-skeleton-20260925-204942`.
+- R1.2 configuration/logging boundary, pre-change bundle and tree archive:
+  `/opt/docs/config-backups-user/seo-r12-config-logging-20260925-210217`.

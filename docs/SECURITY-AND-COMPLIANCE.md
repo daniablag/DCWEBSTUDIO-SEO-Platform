@@ -13,6 +13,13 @@ credential.
 - Rotate one provider independently without rebuilding content data.
 - Redact request headers, query credentials and OAuth responses from logs.
 
+The tracked `.env.example` and the `DCWS_SEO_` settings model contain only
+non-secret runtime controls. Unknown project-prefixed settings fail startup,
+and validation errors report field/type only rather than the rejected value.
+Provider, database, Telegram, AI and WordPress credentials must not be added as
+plain environment fields; later adapters use reviewed read-only secret-file
+references.
+
 ## Network
 
 - PostgreSQL is private and has no host/public port.

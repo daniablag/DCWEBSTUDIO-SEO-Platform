@@ -103,6 +103,14 @@ structured logs, audit events and notifications. Application code records the
 final state and writes a sanitized notification event to the PostgreSQL outbox
 before any channel delivery is attempted.
 
+The R1.2 application boundary uses canonical UUID correlation IDs and emits one
+bounded JSON object per line with timestamp, level, logger, stable event name,
+message and correlation ID. Structured fields are recursively bounded and keys
+for credentials, authorization, cookies, raw HTML, provider payloads, prompts
+and source excerpts are redacted. Common bearer, assignment, URL-userinfo and
+private-key forms are also removed from free text. Invalid inbound correlation
+IDs fail rather than reaching a log record.
+
 Telegram receives concise actionable events, not the general log stream. The
 default notification set is:
 
